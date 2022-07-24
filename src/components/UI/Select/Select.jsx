@@ -1,9 +1,22 @@
 import SelectOption from "./SelectOption"
+//import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
-const Select = ({elements}) =>{
+const Select = ({elements, setSelect}) =>{
+    const optionSelected = useRef();
+    const handleChange =()=>{
+        //setDeptoSel(departamentoSeleccionado);
+        console.log("Seleccionado ", optionSelected.current.value);
+        setSelect(optionSelected.current.value);
+
+    }
+
+
     return(
-        <select >
+        <select onChange={handleChange} ref={optionSelected}> 
+        <option>Seleccionar</option>           
             <SelectOption elements={elements}></SelectOption>
+            
         </select>
     )
 }

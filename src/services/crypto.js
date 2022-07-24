@@ -1,23 +1,19 @@
-const CRYPTO = "https://crypto.develotion.com/";
+const CRYPTO = "https://crypto.develotion.com";
 
 //* Usuarios
 async function registro(user, password, idDepartamento, idCiudad) {
   const response = await fetch(
-    `${CRYPTO}/usuarios.php`,
-    {
+    `${CRYPTO}/usuarios.php`,   {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-    },
-    {
+      headers: { "Content-Type": "application/json" 
+    },    
       body: JSON.stringify({
-        user,
-        password,
-        idDepartamento,
-        idCiudad,
-      }),
-      credentials: "include",
-    }
-  );
+        usuario: user,
+        password: password,
+        idDepartamento: idDepartamento,
+        idCiudad: idCiudad,
+      }),      
+    });
   if (response.status === 200 || response.status === 201) {
     return response.json();
   } else {
@@ -28,29 +24,33 @@ async function registro(user, password, idDepartamento, idCiudad) {
   }
 }
 
-async function login(user, password) {
-  const response = await fetch(
-    `${CRYPTO}/login.php`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    },
-    {
-      body: JSON.stringify({
-        user,
-        password,
-      }),
-      credentials: "include",
+async function login(user, pass) {
+  try{
+    console.log("Envio", user, pass)
+    const response = await fetch(
+      `${CRYPTO}/login.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json"
+       },            
+        body : JSON.stringify({
+          usuario:user,
+          password: pass,
+        }),           
+      });
+    
+    console.log("devuelve ", response)
+    if (response.status === 200 || response.status === 201) {
+      return response.json();
+    } else {
+      return Promise.reject({
+        message: "Error en el login de usuario",
+        status: response.status,
+      });
     }
-  );
-  if (response.status === 200 || response.status === 201) {
-    return response.json();
-  } else {
-    return Promise.reject({
-      message: "Error en el login de usuario",
-      status: response.status,
-    });
+  }catch(error){
+    return Promise.reject(error);
   }
+
 }
 
 //*Departamentos
