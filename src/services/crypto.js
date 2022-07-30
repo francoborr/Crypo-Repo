@@ -2,18 +2,16 @@ const CRYPTO = "https://crypto.develotion.com";
 
 //* Usuarios
 async function registro(user, password, idDepartamento, idCiudad) {
-  const response = await fetch(
-    `${CRYPTO}/usuarios.php`,   {
-      method: "POST",
-      headers: { "Content-Type": "application/json" 
-    },    
-      body: JSON.stringify({
-        usuario: user,
-        password: password,
-        idDepartamento: idDepartamento,
-        idCiudad: idCiudad,
-      }),      
-    });
+  const response = await fetch(`${CRYPTO}/usuarios.php`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      usuario: user,
+      password: password,
+      idDepartamento: idDepartamento,
+      idCiudad: idCiudad,
+    }),
+  });
   if (response.status === 200 || response.status === 201) {
     return response.json();
   } else {
@@ -25,20 +23,18 @@ async function registro(user, password, idDepartamento, idCiudad) {
 }
 
 async function login(user, pass) {
-  try{
-    console.log("Envio", user, pass)
-    const response = await fetch(
-      `${CRYPTO}/login.php`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json"
-       },            
-        body : JSON.stringify({
-          usuario:user,
-          password: pass,
-        }),           
-      });
-    
-    console.log("devuelve ", response)
+  try {
+    console.log("Envio", user, pass);
+    const response = await fetch(`${CRYPTO}/login.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        usuario: user,
+        password: pass,
+      }),
+    });
+
+    console.log("devuelve ", response);
     if (response.status === 200 || response.status === 201) {
       return response.json();
     } else {
@@ -47,10 +43,9 @@ async function login(user, pass) {
         status: response.status,
       });
     }
-  }catch(error){
+  } catch (error) {
     return Promise.reject(error);
   }
-
 }
 
 //*Departamentos
@@ -119,15 +114,12 @@ async function getCiudades() {
 }
 //* Transacciones
 
-async function getTransacciones(idUsuario) {
+async function getTransacciones(idUsuario, apikey) {
   const response = await fetch(
     `${CRYPTO}/transacciones.php?idUsuario=${idUsuario}`,
     {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
-    },
-    {
-      credentials: "include",
+      headers: { "Content-Type": "application/json", apikey: apikey },
     }
   );
   if (response.status === 200 || response.status === 201) {
@@ -140,31 +132,28 @@ async function getTransacciones(idUsuario) {
   }
 }
 
-async function postTransaccion(apiKey,
+async function postTransaccion(
+  apiKey,
   userId,
   tipoOperacion,
   moneda,
   cantidad,
   valorActual
 ) {
-  const response = await fetch(
-    `${CRYPTO}/transacciones.php`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        apikey:apiKey
-      },
-      body: JSON.stringify({
-        idUsuario :userId,
-        tipoOperacion:tipoOperacion,
-        moneda:moneda,
-        cantidad:cantidad,
-        valorActual:valorActual,
-      }),
-      
-    }
-  );
+  const response = await fetch(`${CRYPTO}/transacciones.php`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: apiKey,
+    },
+    body: JSON.stringify({
+      idUsuario: userId,
+      tipoOperacion: tipoOperacion,
+      moneda: moneda,
+      cantidad: cantidad,
+      valorActual: valorActual,
+    }),
+  });
   if (response.status === 200 || response.status === 201) {
     return response.json();
   } else {
@@ -183,7 +172,7 @@ async function getMonedas(apiKey) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        apiKey:apiKey
+        apiKey: apiKey,
       },
     },
     {
@@ -202,18 +191,12 @@ async function getMonedas(apiKey) {
 
 //*Usuarios por departamentos
 async function getUsuariosPorDepartamentos() {
-  const response = await fetch(
-    `${CRYPTO}/usuariosPorDepartamento.php`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+  const response = await fetch(`${CRYPTO}/usuariosPorDepartamento.php`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
     },
-    {
-      credentials: "include",
-    }
-  );
+  });
   if (response.status === 200 || response.status === 201) {
     return response.json();
   } else {
@@ -222,8 +205,16 @@ async function getUsuariosPorDepartamentos() {
       status: response.status,
     });
   }
+}
+
+export {
+  registro,
+  login,
+  getDepartamentos,
+  getCiudad,
+  getCiudades,
+  getTransacciones,
+  postTransaccion,
+  getMonedas,
+  getUsuariosPorDepartamentos,
 };
-
-
-export { registro, login, getDepartamentos, getCiudad, getCiudades, getTransacciones, postTransaccion
-,getMonedas, getUsuariosPorDepartamentos }
