@@ -1,10 +1,14 @@
 import Button from "../../../UI/Button/Button";
 import { useRef } from "react";
 import { login } from "../../../../services/crypto";
+import { setLoginUser } from "../../../../app/slices/userSlice";
+import { useDispatch } from "react-redux";
 
-const LoginForm = ({onLoginUser}) => {
+const LoginForm = () => {
     const inputUserName = useRef();
     const inputPassword = useRef();
+
+    const dispatch = useDispatch();
 
     const onHandleLogin = async e =>{
         e.preventDefault();
@@ -15,7 +19,7 @@ const LoginForm = ({onLoginUser}) => {
             try{
                 const {apiKey, id} = await login(userName, password)
                 const user = {apiKey: apiKey, id : id}
-                onLoginUser(user)
+                dispatch(setLoginUser(user));
             }catch (error){
                 alert("Ha ocurrido un error ", error);
             }

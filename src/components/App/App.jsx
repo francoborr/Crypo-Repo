@@ -6,20 +6,19 @@ import Dashboard from '../Screens/Dashboard/Dashboard';
 
 import 'bootstrap-css-only'
 import Registro from '../Screens/Registro/Registro';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const [userLogged, setUserLogged] = useState(null);
-  const onLoginUser = user => {
-    setUserLogged(user)
-  }
+  
+  const userLogged = useSelector(state => state.user.user);
 
 
   return (
     <div className="App">
         <Registro></Registro>
         {!userLogged? (
-          <Login onLoginUser={onLoginUser}/>) : 
-          (<Dashboard user= {userLogged}></Dashboard>)}      
+          <Login/>) : 
+          (<Dashboard></Dashboard>)}      
     </div>
   );
 }

@@ -2,15 +2,15 @@ import Button from "../../UI/Button/Button";
 import LoginForm from "./LoginForm";
 import Title from "../../UI/Title";
 
-const Login = ({onLoginUser, onRegisterUser}) =>{
+const Login = () =>{
     return(
         <>
             <section className='d-flex flex-md justify-content-center login'>
                 <div className='card'>
                     <Title title="Login" /> 
                     <section className='card-body'>
-                        <LoginForm onLoginUser={onLoginUser} />
-                        <Button onRegisterUser={onRegisterUser} cta="Registrar" classColor={"btn-primary"}></Button>
+                        <LoginForm/>
+                        {/* <Button onHandleClick={onRegisterUser} cta="Registrar" classColor={"btn-primary"}></Button> */}
                     </section>
                 </div>
             </section>

@@ -1,6 +1,6 @@
 const SelectOption = ({elements})=>{
     return (
-        elements.map(element => <option value={element.id}>{element.nombre}</option>)
+        elements.map(element => <option value={element.id} key={element.id}>{element.nombre}</option>)
     )
 }
 

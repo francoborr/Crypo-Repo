@@ -140,7 +140,7 @@ async function getTransacciones(idUsuario) {
   }
 }
 
-async function postTransaccion(
+async function postTransaccion(apiKey,
   userId,
   tipoOperacion,
   moneda,
@@ -153,17 +153,16 @@ async function postTransaccion(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        apikey:apiKey
       },
-    },
-    {
       body: JSON.stringify({
-        userId,
-        tipoOperacion,
-        moneda,
-        cantidad,
-        valorActual,
+        idUsuario :userId,
+        tipoOperacion:tipoOperacion,
+        moneda:moneda,
+        cantidad:cantidad,
+        valorActual:valorActual,
       }),
-      credentials: "include",
+      
     }
   );
   if (response.status === 200 || response.status === 201) {
@@ -177,13 +176,14 @@ async function postTransaccion(
 }
 
 //*  Monedas
-async function getMonedas() {
+async function getMonedas(apiKey) {
   const response = await fetch(
     `${CRYPTO}/monedas.php`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        apiKey:apiKey
       },
     },
     {

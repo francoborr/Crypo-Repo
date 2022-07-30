@@ -6,24 +6,30 @@ import { getCiudad } from "../../../../services/crypto";
 import { registro } from "../../../../services/crypto";
 import Button from "../../../UI/Button/Button";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setDepartamentos } from "../../../../app/slices/deptoSlice";
 
-const RegistroForm = ({onRegistroUser}) =>{
+const RegistroForm = () =>{  
   const inputUserName = useRef();
   const inpuUserPass = useRef();
+  const dispatchDepartamentos = useDispatch();
+
   //let departamentos;
   // const departamentoId = useRef();
   // const ciudadId = useRef();
-  const [departamentos, setDepartamentos] = useState([]);  
+  //const [departamentos, setDepartamentos] = useState([]);  
   const [ciudades, setCiudades] = useState([]);  
   const [deptoSel, setDeptoSel] = useState(0); 
   const [ciudadSel, setCiudadSel] = useState(0);
-  
+  const departamentos = useSelector(state => state.departamentos.departamentos);
 
   useEffect(()=>{
     try{
         (async()=>{
             const {departamentos} = await getDepartamentos();
-             setDepartamentos(departamentos)
+             //setDepartamentos(departamentos)
+             dispatchDepartamentos(setDepartamentos(departamentos));
+             
             console.log("Dentro ", departamentos)            
         })()
     }catch(error){

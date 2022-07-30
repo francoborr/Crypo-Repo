@@ -6,5 +6,9 @@ const Button = ({cta, classColor, onHandleClick}) =>{
     )
 }
 
+Button.defaultProps = {
+    classColor: 'btn-primary',
+    cta: 'Boton'
+  }
 
 export default Button;
