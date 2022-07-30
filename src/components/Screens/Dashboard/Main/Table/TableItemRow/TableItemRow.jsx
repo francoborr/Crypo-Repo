@@ -1,7 +1,14 @@
-const TableItemRow=()=>{
-    return(
-        "Este es un item row"
-    )
-}
+import { useDispatch } from "react-redux";
+const TableItemRow = ({ transaccion }) => {
+  const dispatch = useDispatch();
+  return (
+    <tr>
+      <th scope="row">{transaccion.id}</th>
+      <td>{transaccion.tipo_operacion}</td>
+      <td>{transaccion.moneda}</td>
+      <td>{transaccion.cantidad}</td>
+    </tr>
+  );
+};
 
 export default TableItemRow;
