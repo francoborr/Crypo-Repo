@@ -33,34 +33,32 @@ const Table = () => {
     }
   }, []);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     const transaccionesAux = transacciones.map((transaccion) => {
       const monedaAux = monedas.filter(
         (moneda) => moneda.id == transaccion.moneda
-      );   
-      const [moneda] = monedaAux;     
+      );
+      const [moneda] = monedaAux;
 
-      const nombre = moneda!=undefined?moneda.nombre:"cargando";
+      const nombre = moneda != undefined ? moneda.nombre : "cargando";
       return {
         id: transaccion.id,
         tipo_operacion: transaccion.tipo_operacion == 1 ? "Compra" : "Venta",
-         moneda: nombre,
+        moneda: nombre,
         cantidad: transaccion.cantidad,
-        valor_actual:transaccion.valor_actual
+        valor_actual: transaccion.valor_actual,
       };
     });
-    
+
     dispatchTransaccionesDescripcion(
       setTransaccionesDescripcion(transaccionesAux)
     );
-  },[monedas, transacciones])
+  }, [monedas, transacciones]);
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
+    <table className="w-100 text-center   table-sm table-bordered table-hover ">
+      <thead className="text-uppercase text-white text-lg bg-dark">
+        <tr className="">
           <th scope="col">Tipo Operación</th>
           <th scope="col">Moneda</th>
           <th scope="col">Cantidad</th>
