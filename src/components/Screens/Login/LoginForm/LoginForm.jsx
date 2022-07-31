@@ -1,5 +1,5 @@
 import Button from "../../../UI/Button/Button";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { login } from "../../../../services/crypto";
 import { setLoginUser } from "../../../../app/slices/userSlice";
 import { useDispatch } from "react-redux";
@@ -28,24 +28,38 @@ const LoginForm = () => {
     }
   };
 
+  const [verBtnLogin, setVerBtnLogin] = useState(false)
+  const veBtnLogin=()=>{
+    console.log("inputUserName",inputUserName.current.value)
+    console.log("inputPassword",inputPassword.current.value)
+    if(inputPassword.current.value!="" && inputUserName.current.value!=""){
+      setVerBtnLogin(true)
+      console.log("Cambio a true")
+    }else{
+      setVerBtnLogin(false)
+      console.log("Cambio a false")
+    }
+    console.log("VerBTNLOGIN", verBtnLogin)
+  }
+
+  useEffect(()=>{veBtnLogin()},[inputUserName,inputPassword])
+
+
   return (
     <>
-      <form>
+      <form >
         <label>Username</label>
         <br />
-        <input className="form-control" type="text" ref={inputUserName} />
+        <input className="form-control" type="text" ref={inputUserName} onChange={veBtnLogin}/>
         <br />
         <label>Password</label>
         <br />
-        <input className="form-control" type="password" ref={inputPassword} />
+        <input className="form-control" type="password" ref={inputPassword} onChange={veBtnLogin} />
         <br />
         <br />
         {
-          <Button
-            cta="Login"
-            classColor={"btn-primary"}
-            onHandleClick={onHandleLogin}
-          />
+          (verBtnLogin?<Button  cta="Login" onHandleClick={onHandleLogin} />:false)
+          
         }
       </form>
     </>

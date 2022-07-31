@@ -7,6 +7,7 @@ const TableItemRow = ({ transaccion }) => {
       <td>{transaccion.tipo_operacion}</td>
       <td>{transaccion.moneda}</td>
       <td>{transaccion.cantidad}</td>
+      <td>{transaccion.valor_actual}</td>
     </tr>
   );
 };

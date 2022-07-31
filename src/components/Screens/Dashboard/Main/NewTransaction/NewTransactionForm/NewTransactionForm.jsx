@@ -1,6 +1,6 @@
 import Select from "../../../../../UI/Select";
 import Button from "../../../../../UI/Button/Button";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { getMonedas, postTransaccion } from "../../../../../../services/crypto";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -9,11 +9,13 @@ import {
   setIdMonedaSeleccionada,
   setSelCompraVenta,
 } from "../../../../../../app/slices/monedasSlice";
+import { addTransaccion } from "../../../../../../app/slices/transaccionesSlice"
 
 const NewTransactionForm = () => {
   const userLogged = useSelector((state) => state.user.user);
   const { apiKey, id } = userLogged;
   const monedasSelect = useSelector((state) => state.monedas.monedas);
+  const dispatchAddTransacciones = useDispatch();
 
   const dispatchMonedas = useDispatch(); //Lista de monedas
   useEffect(() => {
@@ -91,6 +93,18 @@ const NewTransactionForm = () => {
           monedaSeleccionada.cotizacion
         );
         alert(promesa.mensaje);
+
+        if(promesa.codigo==200){
+          const tran={
+            id:promesa.idTransaccion,
+            tipo_operacion:selCompraVenta,
+            moneda:idMonedaSeleccionada,
+            cantidad:cantidad.current.value,
+            valor_actual:monedaSeleccionada.cotizacion
+          }
+          dispatchAddTransacciones(addTransaccion(tran))
+        }
+
       } catch (error) {
         alert("Ha ocurrido un error", error);
       }

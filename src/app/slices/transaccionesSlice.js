@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   transacciones: [],
   transaccionesDescripcion: [],
+  montoFinal:0,
 };
 
 export const transaccionesSlice = createSlice({
@@ -23,9 +24,13 @@ export const transaccionesSlice = createSlice({
       const { payload } = action;
       state.transaccionesDescripcion = payload;
     },
+    setMontoFinal:(state, action)=>{
+      const {payload}= action;
+      state.montoFinal = payload
+    }
   },
 });
 
-export const { setTransacciones, setTransaccionesDescripcion } =
+export const { setTransacciones, setTransaccionesDescripcion,addTransaccion, setMontoFinal } =
   transaccionesSlice.actions;
 export default transaccionesSlice.reducer;

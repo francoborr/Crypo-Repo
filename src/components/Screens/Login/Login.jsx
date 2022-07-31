@@ -31,7 +31,7 @@ const Login = () => {
 
   return (
     <>
-      <section className="d-flex flex-md justify-content-center login">
+      <section className="d-flex flex-md justify-content-center login ">
         <div>{showRegistration ? <Registro /> : login}</div>
       </section>
     </>

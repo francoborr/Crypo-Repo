@@ -4,7 +4,6 @@ import {
   setTransaccionesDescripcion,
 } from "../../../../../app/slices/transaccionesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import { useEffect } from "react";
 import { getTransacciones } from "../../../../../services/crypto";
 
@@ -28,31 +27,34 @@ const Table = () => {
       (async () => {
         const { transacciones } = await getTransacciones(user.id, user.apiKey);
         dispatchTransacciones(setTransacciones(transacciones));
-        const transaccionesAux = transacciones.map((transaccion) => {
-          const monedaAux = monedas.filter(
-            (moneda) => moneda.id == transaccion.moneda
-          );
-          const [moneda] = monedaAux;
-
-          return {
-            tipo_operacion:
-              transaccion.tipo_operacion == 1 ? "Compra" : "Venta",
-            moneda: monedaAux.nombre,
-            cantidad: transaccion.cantidad,
-          };
-        });
-
-        debugger;
-        dispatchTransaccionesDescripcion(
-          setTransaccionesDescripcion(transaccionesAux)
-        );
-        debugger;
-        console.log("TransaccionesDesc", transaccionesDescripcion);
       })();
     } catch (error) {
       alert.error("Ha ocurrido un error al cargar transacciones", error);
     }
   }, []);
+
+
+  useEffect(()=>{
+    const transaccionesAux = transacciones.map((transaccion) => {
+      const monedaAux = monedas.filter(
+        (moneda) => moneda.id == transaccion.moneda
+      );   
+      const [moneda] = monedaAux;     
+
+      const nombre = moneda!=undefined?moneda.nombre:"cargando";
+      return {
+        id: transaccion.id,
+        tipo_operacion: transaccion.tipo_operacion == 1 ? "Compra" : "Venta",
+         moneda: nombre,
+        cantidad: transaccion.cantidad,
+        valor_actual:transaccion.valor_actual
+      };
+    });
+    
+    dispatchTransaccionesDescripcion(
+      setTransaccionesDescripcion(transaccionesAux)
+    );
+  },[monedas, transacciones])
 
   return (
     <table className="table">
@@ -62,6 +64,7 @@ const Table = () => {
           <th scope="col">Tipo Operación</th>
           <th scope="col">Moneda</th>
           <th scope="col">Cantidad</th>
+          <th scope="col">Valor del momento</th>
         </tr>
       </thead>
       <tbody>
