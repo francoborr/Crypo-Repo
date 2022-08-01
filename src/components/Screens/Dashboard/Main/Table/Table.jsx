@@ -56,7 +56,7 @@ const Table = () => {
   }, [monedas, transacciones]);
 
   return (
-    <table className="w-100 text-center   table-sm table-bordered table-hover ">
+    <table className="w-100 text-center table-sm table-bordered table-hover ">
       <thead className="text-uppercase text-white text-lg bg-dark">
         <tr className="">
           <th scope="col">Tipo Operación</th>

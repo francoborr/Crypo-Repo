@@ -33,7 +33,9 @@ const MontoFinal = () => {
   return (
     <div className=" card p-4 m-4 rounded-lg align-self-start shadow-lg rounded ">
       <h2 className="text-center">Monto final</h2>
-      <h4>{montoFinal}</h4>
+      <h4 className={montoFinal < 0 ? "text-danger" : "text-success"}>
+        ${montoFinal}
+      </h4>
     </div>
   );
 };

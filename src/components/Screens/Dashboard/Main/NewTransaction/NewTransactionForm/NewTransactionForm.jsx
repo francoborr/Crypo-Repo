@@ -9,7 +9,7 @@ import {
   setIdMonedaSeleccionada,
   setSelCompraVenta,
 } from "../../../../../../app/slices/monedasSlice";
-import { addTransaccion } from "../../../../../../app/slices/transaccionesSlice"
+import { addTransaccion } from "../../../../../../app/slices/transaccionesSlice";
 
 const NewTransactionForm = () => {
   const userLogged = useSelector((state) => state.user.user);
@@ -94,17 +94,16 @@ const NewTransactionForm = () => {
         );
         alert(promesa.mensaje);
 
-        if(promesa.codigo==200){
-          const tran={
-            id:promesa.idTransaccion,
-            tipo_operacion:selCompraVenta,
-            moneda:idMonedaSeleccionada,
-            cantidad:cantidad.current.value,
-            valor_actual:monedaSeleccionada.cotizacion
-          }
-          dispatchAddTransacciones(addTransaccion(tran))
+        if (promesa.codigo == 200) {
+          const tran = {
+            id: promesa.idTransaccion,
+            tipo_operacion: selCompraVenta,
+            moneda: idMonedaSeleccionada,
+            cantidad: cantidad.current.value,
+            valor_actual: monedaSeleccionada.cotizacion,
+          };
+          dispatchAddTransacciones(addTransaccion(tran));
         }
-
       } catch (error) {
         alert("Ha ocurrido un error", error);
       }
@@ -115,18 +114,34 @@ const NewTransactionForm = () => {
     <>
       <form>
         <br />
-        <Select elements={compraVenta} setSelect={setSelCompraVentaAux} />
-        <Select elements={monedasSelect} setSelect={setIdMonedaSelAux} />
-        {monedaSeleccionada ? (
-          <p>Precio: {monedaSeleccionada.cotizacion}</p>
-        ) : (
-          <p></p>
-        )}
+        <Select
+          className="mb-3"
+          elements={compraVenta}
+          setSelect={setSelCompraVentaAux}
+        />
         <br />
+        <Select
+          className="mb-3"
+          elements={monedasSelect}
+          setSelect={setIdMonedaSelAux}
+        />
+        <div>
+          {monedaSeleccionada ? (
+            <p>Precio: {monedaSeleccionada.cotizacion}</p>
+          ) : (
+            <p></p>
+          )}
+        </div>
+
         <label>Cantidad</label>
         <br />
         <input type="number" id="cantidad" ref={cantidad} />
-        <Button cta="Comprar" onHandleClick={onHandleNewTransaction}></Button>
+        <br />
+        <Button
+          className="mt-3 w-100 bg-success"
+          cta="Comprar"
+          onHandleClick={onHandleNewTransaction}
+        ></Button>
       </form>
     </>
   );
