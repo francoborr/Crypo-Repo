@@ -8,11 +8,14 @@ import Button from "../../../UI/Button/Button";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDepartamentos } from "../../../../app/slices/deptoSlice";
+import { setLoginUser} from "../../../../app/slices/userSlice"
 
 const RegistroForm = () => {
   const inputUserName = useRef();
   const inpuUserPass = useRef();
   const dispatchDepartamentos = useDispatch();
+  const dispatchUsuario = useDispatch();
+
 
   //let departamentos;
   // const departamentoId = useRef();
@@ -30,9 +33,7 @@ const RegistroForm = () => {
       (async () => {
         const { departamentos } = await getDepartamentos();
         //setDepartamentos(departamentos)
-        dispatchDepartamentos(setDepartamentos(departamentos));
-
-        console.log("Dentro ", departamentos);
+        dispatchDepartamentos(setDepartamentos(departamentos));        
       })();
     } catch (error) {
       alert("Ha ocurrido un error", error);
@@ -70,8 +71,12 @@ const RegistroForm = () => {
           departamentoId,
           ciudadId
         );
+        alert("Éxito al registrar usuario")
+        dispatchUsuario(setLoginUser({ apiKey: apiKey, id: id }))
+
       } catch (error) {
-        alert("Ha ocurrido un  error");
+        console.log(error)
+        alert(error);
       }
     } else {
       alert("No pueden existir campos vacios");
