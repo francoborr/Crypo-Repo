@@ -12,8 +12,9 @@ const Login = () => {
   const dispachShowRegistration = useDispatch();
 
   const login = (
-    <div className="card">
-      <Title title="Login" />
+    <div className="card p-3 mx-auto m-5 shadow-lg bg-white ">
+      <Title className="text-center m-2 font-weight-bolder" title="Login" />
+      <hr />
       <section className="card-body">
         <LoginForm />
         {
@@ -22,7 +23,7 @@ const Login = () => {
               dispachShowRegistration(setShowRegistration(!showRegistration));
             }}
             cta="Registrarse"
-            classColor={"btn-primary"}
+            classColor={`mt-4 w-100 bg-dark ${"btn-primary"}`}
           ></Button>
         }
       </section>

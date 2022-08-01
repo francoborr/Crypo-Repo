@@ -4,7 +4,7 @@ import MontoFinal from "./MontoFinal";
 const Main = () => {
   return (
     <>
-      <div className="d-flex justify-content-around h-25">
+      <div className="d-flex justify-content-around">
         <MontoFinal></MontoFinal>
         <NewTransaction></NewTransaction>
       </div>

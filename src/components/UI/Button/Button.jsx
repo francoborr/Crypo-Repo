@@ -1,14 +1,17 @@
-const Button = ({cta, classColor, onHandleClick}) =>{
-    return(
-        <button className={`btn ${classColor}`} onClick={onHandleClick}>
-            {cta}
-        </button>
-    )
-}
+const Button = ({ cta, classColor, onHandleClick, className }) => {
+  return (
+    <button
+      className={`btn ${classColor} ${className}  `}
+      onClick={onHandleClick}
+    >
+      {cta}
+    </button>
+  );
+};
 
 Button.defaultProps = {
-    classColor: 'btn-primary',
-    cta: 'Boton'
-  }
+  classColor: "btn-primary",
+  cta: "Boton",
+};
 
 export default Button;

@@ -28,39 +28,58 @@ const LoginForm = () => {
     }
   };
 
-  const [verBtnLogin, setVerBtnLogin] = useState(false)
-  const veBtnLogin=()=>{
-    console.log("inputUserName",inputUserName.current.value)
-    console.log("inputPassword",inputPassword.current.value)
-    if(inputPassword.current.value!="" && inputUserName.current.value!=""){
-      setVerBtnLogin(true)
-      console.log("Cambio a true")
-    }else{
-      setVerBtnLogin(false)
-      console.log("Cambio a false")
+  const [verBtnLogin, setVerBtnLogin] = useState(false);
+  const veBtnLogin = () => {
+    console.log("inputUserName", inputUserName.current.value);
+    console.log("inputPassword", inputPassword.current.value);
+    if (
+      inputPassword.current.value != "" &&
+      inputUserName.current.value != ""
+    ) {
+      setVerBtnLogin(true);
+      console.log("Cambio a true");
+    } else {
+      setVerBtnLogin(false);
+      console.log("Cambio a false");
     }
-    console.log("VerBTNLOGIN", verBtnLogin)
-  }
+    console.log("VerBTNLOGIN", verBtnLogin);
+  };
 
-  useEffect(()=>{veBtnLogin()},[inputUserName,inputPassword])
-
+  useEffect(() => {
+    veBtnLogin();
+  }, [inputUserName, inputPassword]);
 
   return (
     <>
-      <form >
-        <label>Username</label>
+      <form className="">
+        <label className="mt-2 font-weight-bold">Username</label>
+
+        <input
+          className="form-control mt-2 "
+          type="text"
+          ref={inputUserName}
+          onChange={veBtnLogin}
+        />
+
+        <label className="mt-2 font-weight-bold">Password</label>
+
+        <input
+          className="form-control mt-2"
+          type="password"
+          ref={inputPassword}
+          onChange={veBtnLogin}
+        />
         <br />
-        <input className="form-control" type="text" ref={inputUserName} onChange={veBtnLogin}/>
-        <br />
-        <label>Password</label>
-        <br />
-        <input className="form-control" type="password" ref={inputPassword} onChange={veBtnLogin} />
-        <br />
-        <br />
-        {
-          (verBtnLogin?<Button  cta="Login" onHandleClick={onHandleLogin} />:false)
-          
-        }
+
+        {verBtnLogin ? (
+          <Button
+            cta="Login"
+            className="w-100 bg-blue"
+            onHandleClick={onHandleLogin}
+          />
+        ) : (
+          false
+        )}
       </form>
     </>
   );

@@ -1,4 +1,4 @@
-import Button from '../Button/Button'
+import Button from "../Button/Button";
 const TableItemRow = ({ transaccion }) => {
   return (
     <tr>
@@ -7,10 +7,10 @@ const TableItemRow = ({ transaccion }) => {
       <td>{transaccion.cantidad}</td>
       <td>{transaccion.precio}</td>
       <td>
-        <Button cta={'Delete'} classColor='btn-danger' />
+        <Button cta={"Delete"} classColor="btn-danger" />
       </td>
     </tr>
-  )
-}
+  );
+};
 
-export default TableItemRow
+export default TableItemRow;

@@ -12,12 +12,17 @@ const Registro = ({ onRegisterUser }) => {
 
   return (
     <>
-      <section className="d-flex flex-md justify-content-center login">
-        <div className="card">
-          <Title title="Registro" />
+      <section className="m-5">
+        <div className="card p-4 shadow-lg rounded bg-white">
+          <Title
+            title="Registro"
+            className="text-center font-weight-bolder pb-3"
+          />
+          <hr />
           <RegistroForm onRegisterUser={onRegisterUser} />
           <Button
             cta="Volver"
+            className="bg-danger"
             classColor={"btn-primary"}
             onHandleClick={() => {
               dispachShowRegistration(setShowRegistration(!showRegistration));

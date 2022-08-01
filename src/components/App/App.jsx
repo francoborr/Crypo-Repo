@@ -12,7 +12,7 @@ function App() {
   const userLogged = useSelector((state) => state.user.user);
 
   return (
-    <div className="App">
+    <div className="App bg-light w-100 h-100 ">
       {!userLogged ? <Login /> : <Dashboard></Dashboard>}
     </div>
   );
