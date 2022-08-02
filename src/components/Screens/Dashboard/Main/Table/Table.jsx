@@ -11,16 +11,16 @@ import { getTransacciones } from "../../../../../services/crypto";
 
 const Table = () => {
   const user = useSelector((state) => state.user.user);
-  const dispatchTransacciones = useDispatch();
-  const dispatchTransaccionesDescripcion = useDispatch();
   const transacciones = useSelector(
     (state) => state.transacciones.transacciones
   );
   const monedas = useSelector((state) => state.monedas.monedas);
-
   const transaccionesDescripcion = useSelector(
     (state) => state.transacciones.transaccionesDescripcion
   );
+
+  const dispatchTransacciones = useDispatch();
+  const dispatchTransaccionesDescripcion = useDispatch();
 
   useEffect(() => {
     try {
@@ -43,7 +43,7 @@ const Table = () => {
       const nombre = moneda != undefined ? moneda.nombre : "cargando";
       return {
         id: transaccion.id,
-        tipo_operacion: transaccion.tipo_operacion == 1 ? "Compra" : "Venta",
+        tipo_operacion: transaccion.tipo_operacion ? "Compra" : "Venta",
         moneda: nombre,
         cantidad: transaccion.cantidad,
         valor_actual: transaccion.valor_actual,

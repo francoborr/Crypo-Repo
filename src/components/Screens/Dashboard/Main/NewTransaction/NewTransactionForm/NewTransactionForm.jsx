@@ -72,12 +72,8 @@ const NewTransactionForm = () => {
 
   const onHandleNewTransaction = async (e) => {
     e.preventDefault();
-    console.log(
-      "onHandleNewTransaction",
-      cantidad.current.value,
-      idMonedaSeleccionada,
-      selCompraVenta
-    );
+    const p = selCompraVenta;
+    debugger;
     if (
       cantidad.current.value != 0 &&
       idMonedaSeleccionada != 0 &&
@@ -139,7 +135,12 @@ const NewTransactionForm = () => {
         <br />
         <Button
           className="mt-3 w-100 bg-success"
-          cta="Comprar"
+          cta={`${selCompraVenta == 1 ? "Comprar" : "Vender"} `}
+          classColor={`${
+            selCompraVenta == 1
+              ? "bg-success text-white"
+              : "bg-danger text-white"
+          } `}
           onHandleClick={onHandleNewTransaction}
         ></Button>
       </form>
