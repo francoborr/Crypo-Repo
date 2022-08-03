@@ -36,6 +36,7 @@ export const transaccionesSlice = createSlice({
       const { payload } = action;
       state.cantidadVentas = payload;
     },
+
   },
 });
 
