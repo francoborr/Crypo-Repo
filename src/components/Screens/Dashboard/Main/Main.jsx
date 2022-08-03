@@ -8,16 +8,17 @@ const Main = () => {
   return (
     <>
       <div className="d-flex justify-content-around">
-        <Chart></Chart> 
-        <MontoFinal></MontoFinal>
+          <NewTransaction></NewTransaction>
+          <MontoFinal></MontoFinal>
+      </div>    
+      <div className="d-flex justify-content-around">
+          <Chart></Chart>        
 
-        <div className="card">
+        <div className="card p-4 m-4 rounded-lg align-self-start shadow-lg rounded">
           <GraficoCompraPorMoneda></GraficoCompraPorMoneda>
         </div>
-
-
-        <NewTransaction></NewTransaction>
       </div>
+
       <Table></Table>
     </>
   );
