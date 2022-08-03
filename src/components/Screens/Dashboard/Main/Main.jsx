@@ -4,12 +4,14 @@ import MontoFinal from "./MontoFinal";
 import Chart from "./Chart";
 import GraficoCompraPorMoneda from "./GraficoCompraPorMoneda";
 import GraficoVentaPorMoneda from "./GraficoVentaPorMoneda/GraficoVentaPorMoneda";
+import GraficoParaUnaMoneda from "./GrficoParaUnaMoneda"
 
 const Main = () => {
   return (
     <>
       <div className="d-flex justify-content-around">
           <NewTransaction></NewTransaction>
+          <GraficoParaUnaMoneda></GraficoParaUnaMoneda>
           <MontoFinal></MontoFinal>
       </div>    
       <div className="d-flex justify-content-around">

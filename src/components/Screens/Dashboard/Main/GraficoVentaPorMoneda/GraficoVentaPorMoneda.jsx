@@ -11,8 +11,6 @@ const GraficoVentaPorMoneda = () => {
   const transacciones = useSelector(
     (state) => state.transacciones.transacciones
   );
-//   const compras = useSelector((state) => state.transacciones.cantidadCompras);
-//   const ventas = useSelector((state) => state.transacciones.cantidadVentas);
 
 const monedas = useSelector((state)=> state.monedas.monedas)
 const ventasPorMoneda = useSelector((state)=> state.monedas.ventasPorMoneda);

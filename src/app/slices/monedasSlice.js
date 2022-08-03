@@ -6,7 +6,8 @@ const initialState = {
   idMonedaSeleccionada: 0,
   selCompraVenta: 0,
   comprasPorMoneda: [],
-  ventasPorMoneda: []
+  ventasPorMoneda: [],
+  transaccionesPorMoneda:[],
 };
 
 export const monedasSlice = createSlice({
@@ -39,6 +40,11 @@ export const monedasSlice = createSlice({
     setVentaPorMoneda :(state, action) =>{
       const {payload} = action;
       state.ventasPorMoneda = payload;
+    },
+    setTransaccionesPorMoneda:(state, action)=>{
+      const {payload} = action;
+      state.transaccionesPorMoneda = payload;
+      console.log("setTransaccionesPorMoneda", payload)
     }
   },
 });
@@ -49,6 +55,7 @@ export const {
   setIdMonedaSeleccionada,
   setSelCompraVenta,
   setCompraPorMoneda,
-  setVentaPorMoneda
+  setVentaPorMoneda,
+  setTransaccionesPorMoneda
 } = monedasSlice.actions;
 export default monedasSlice.reducer;
