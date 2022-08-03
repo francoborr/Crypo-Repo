@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   transacciones: [],
   transaccionesDescripcion: [],
-  montoFinal:0,
+  montoFinal: 0,
 };
 
 export const transaccionesSlice = createSlice({
@@ -24,13 +24,27 @@ export const transaccionesSlice = createSlice({
       const { payload } = action;
       state.transaccionesDescripcion = payload;
     },
-    setMontoFinal:(state, action)=>{
-      const {payload}= action;
-      state.montoFinal = payload
-    }
+    setMontoFinal: (state, action) => {
+      const { payload } = action;
+      state.montoFinal = payload;
+    },
+    setCantidadCompras: (state, action) => {
+      const { payload } = action;
+      state.cantidadCompras = payload;
+    },
+    setCantidadVentas: (state, action) => {
+      const { payload } = action;
+      state.cantidadVentas = payload;
+    },
   },
 });
 
-export const { setTransacciones, setTransaccionesDescripcion,addTransaccion, setMontoFinal } =
-  transaccionesSlice.actions;
+export const {
+  setTransacciones,
+  setTransaccionesDescripcion,
+  addTransaccion,
+  setMontoFinal,
+  setCantidadCompras,
+  setCantidadVentas,
+} = transaccionesSlice.actions;
 export default transaccionesSlice.reducer;

@@ -72,8 +72,6 @@ const NewTransactionForm = () => {
 
   const onHandleNewTransaction = async (e) => {
     e.preventDefault();
-    const p = selCompraVenta;
-    debugger;
     if (
       cantidad.current.value != 0 &&
       idMonedaSeleccionada != 0 &&
@@ -89,7 +87,6 @@ const NewTransactionForm = () => {
           monedaSeleccionada.cotizacion
         );
         alert(promesa.mensaje);
-
         if (promesa.codigo == 200) {
           const tran = {
             id: promesa.idTransaccion,

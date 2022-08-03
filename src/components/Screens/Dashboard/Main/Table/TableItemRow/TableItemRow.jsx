@@ -3,7 +3,7 @@ const TableItemRow = ({ transaccion }) => {
   const dispatch = useDispatch();
   return (
     <tr
-      className={` table-${
+      className={`table-${
         transaccion.tipo_operacion === "Compra" ? "success" : "danger"
       }`}
     >

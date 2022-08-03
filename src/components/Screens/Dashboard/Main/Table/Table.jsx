@@ -34,6 +34,7 @@ const Table = () => {
   }, []);
 
   useEffect(() => {
+    console.log(transacciones);
     const transaccionesAux = transacciones.map((transaccion) => {
       const monedaAux = monedas.filter(
         (moneda) => moneda.id == transaccion.moneda
@@ -43,7 +44,7 @@ const Table = () => {
       const nombre = moneda != undefined ? moneda.nombre : "cargando";
       return {
         id: transaccion.id,
-        tipo_operacion: transaccion.tipo_operacion ? "Compra" : "Venta",
+        tipo_operacion: transaccion.tipo_operacion == 1 ? "Compra" : "Venta",
         moneda: nombre,
         cantidad: transaccion.cantidad,
         valor_actual: transaccion.valor_actual,
@@ -53,6 +54,7 @@ const Table = () => {
     dispatchTransaccionesDescripcion(
       setTransaccionesDescripcion(transaccionesAux)
     );
+    console.log(transaccionesAux);
   }, [monedas, transacciones]);
 
   return (
