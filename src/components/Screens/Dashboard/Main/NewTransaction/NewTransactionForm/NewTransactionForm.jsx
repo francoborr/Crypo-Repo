@@ -114,12 +114,15 @@ const NewTransactionForm = () => {
   return (
     <>
       <form>
+        <label >Comprar/Vender</label>
         <br />
         <Select
           className="mb-3"
           elements={compraVenta}
           setSelect={setSelCompraVentaAux}
         />
+        <br />
+        <label >Moneda</label>
         <br />
         <Select
           className="mb-3"
