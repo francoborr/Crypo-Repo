@@ -6,11 +6,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getTransacciones } from "../../../../../services/crypto";
+import { setLogoutUser } from "../../../../../app/slices/userSlice";
 
-// 0: {id: 1, usuarios_id: 3, tipo_operacion: 1, moneda: 7, cantidad: 20, …}
+
 
 const Table = () => {
   const user = useSelector((state) => state.user.user);
+  const dispatchUser = useDispatch();  
   const transacciones = useSelector(
     (state) => state.transacciones.transacciones
   );
@@ -25,11 +27,18 @@ const Table = () => {
   useEffect(() => {
     try {
       (async () => {
-        const { transacciones } = await getTransacciones(user.id, user.apiKey);
+        try{
+        const promesa= await getTransacciones(user.id, user.apiKey);
+        const { transacciones } = promesa;
         dispatchTransacciones(setTransacciones(transacciones));
+        }catch(error){
+          alert("Ha ocurrido un error: "+ error.message);
+          const {status} = error
+          if(status===401)dispatchUser(setLogoutUser())
+        }
       })();
     } catch (error) {
-      alert.error("Ha ocurrido un error al cargar transacciones", error);
+      alert("Ha ocurrido un error al cargar transacciones", error);
     }
   }, []);
 

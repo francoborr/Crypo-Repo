@@ -78,64 +78,76 @@ async function getDepartamentos() {
 
 //cambiar nombre??
 async function getCiudad(idDepartamento) {
-  const response = await fetch(
-    `${CRYPTO}/ciudades.php?idDepartamento=${idDepartamento}`,
-    {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    },
-    {
-      credentials: "include",
+    try{
+    const response = await fetch(
+      `${CRYPTO}/ciudades.php?idDepartamento=${idDepartamento}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      },
+      {
+        credentials: "include",
+      }
+    );
+    if (response.status === 200 || response.status === 201) {
+      return response.json();
+    } else {
+      return Promise.reject({
+        message: "Error al obtener la ciudad",
+        status: response.status,
+      });
     }
-  );
-  if (response.status === 200 || response.status === 201) {
-    return response.json();
-  } else {
-    return Promise.reject({
-      message: "Error al obtener la ciudad",
-      status: response.status,
-    });
-  }
+  } catch (error) {
+    return Promise.reject(error);
+  }    
 }
 
 async function getCiudades() {
-  const response = await fetch(
-    `${CRYPTO}/ciudades.php`,
-    {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    },
-    {
-      credentials: "include",
+    try{
+    const response = await fetch(
+      `${CRYPTO}/ciudades.php`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      },
+      {
+        credentials: "include",
+      }
+    );
+    if (response.status === 200 || response.status === 201) {
+      return response.json();
+    } else {
+      return Promise.reject({
+        message: "Error al obtener ciudades",
+        status: response.status,
+      });
     }
-  );
-  if (response.status === 200 || response.status === 201) {
-    return response.json();
-  } else {
-    return Promise.reject({
-      message: "Error al obtener ciudades",
-      status: response.status,
-    });
-  }
+  } catch (error) {
+    return Promise.reject(error);
+  }    
 }
 //* Transacciones
 
 async function getTransacciones(idUsuario, apikey) {
-  const response = await fetch(
-    `${CRYPTO}/transacciones.php?idUsuario=${idUsuario}`,
-    {
-      method: "GET",
-      headers: { "Content-Type": "application/json", apikey: apikey },
+  try{
+      const response = await fetch(
+      `${CRYPTO}/transacciones.php?idUsuario=${idUsuario}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json", apikey: apikey },
+      }
+    ); 
+    if (response.status === 200 || response.status === 201) {
+      return response.json();
+    } else {      
+      return Promise.reject({        
+        message: "Error al obtener la transacciones",
+        status: response.status,
+      });
     }
-  );
-  if (response.status === 200 || response.status === 201) {
-    return response.json();
-  } else {
-    return Promise.reject({
-      message: "Error al obtener la transaccion",
-      status: response.status,
-    });
-  }
+  } catch (error) {
+    return Promise.reject(error);
+  }    
 }
 
 async function postTransaccion(
@@ -146,71 +158,83 @@ async function postTransaccion(
   cantidad,
   valorActual
 ) {
-  const response = await fetch(`${CRYPTO}/transacciones.php`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      apikey: apiKey,
-    },
-    body: JSON.stringify({
-      idUsuario: userId,
-      tipoOperacion: tipoOperacion,
-      moneda: moneda,
-      cantidad: cantidad,
-      valorActual: valorActual,
-    }),
-  });
-  if (response.status === 200 || response.status === 201) {
-    return response.json();
-  } else {
-    return Promise.reject({
-      message: "Error al agregar la transaccion",
-      status: response.status,
+  try{ 
+      const response = await fetch(`${CRYPTO}/transacciones.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: apiKey,
+      },
+      body: JSON.stringify({
+        idUsuario: userId,
+        tipoOperacion: tipoOperacion,
+        moneda: moneda,
+        cantidad: cantidad,
+        valorActual: valorActual,
+      }),
     });
-  }
+    if (response.status === 200 || response.status === 201) {
+      return response.json();
+    } else {
+      return Promise.reject({
+        message: "Error al agregar la transaccion",
+        status: response.status,
+      });
+    }
+  } catch (error) {
+    return Promise.reject(error);
+  }    
 }
 
 //*  Monedas
 async function getMonedas(apiKey) {
-  const response = await fetch(
-    `${CRYPTO}/monedas.php`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        apiKey: apiKey,
+  try{
+    const response = await fetch(
+      `${CRYPTO}/monedas.php`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          apiKey: apiKey,
+        },
       },
-    },
-    {
-      credentials: "include",
+      {
+        credentials: "include",
+      }
+    );
+    if (response.status === 200 || response.status === 201) {
+      return response.json();
+    } else {
+      return Promise.reject({
+        message: "Error al obtener monedas",
+        status: response.status,
+      });
     }
-  );
-  if (response.status === 200 || response.status === 201) {
-    return response.json();
-  } else {
-    return Promise.reject({
-      message: "Error al obtener monedas",
-      status: response.status,
-    });
-  }
+  } catch (error) {
+    return Promise.reject(error);
+  }    
 }
 
 //*Usuarios por departamentos
 async function getUsuariosPorDepartamentos() {
-  const response = await fetch(`${CRYPTO}/usuariosPorDepartamento.php`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (response.status === 200 || response.status === 201) {
-    return response.json();
-  } else {
-    return Promise.reject({
-      message: "Error al obtener usuarios por departamentos",
-      status: response.status,
+    try{
+    const response = await fetch(`${CRYPTO}/usuariosPorDepartamento.php`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-  }
+    if (response.status === 200 || response.status === 201) {
+      return response.json();
+    } else {
+      return Promise.reject({
+        message: "Error al obtener usuarios por departamentos",
+        status: response.status,
+      });
+    }
+  } catch (error) {
+    return Promise.reject(error);
+  }    
 }
 
 export {

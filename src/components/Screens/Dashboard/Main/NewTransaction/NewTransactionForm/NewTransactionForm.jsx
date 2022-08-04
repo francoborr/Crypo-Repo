@@ -10,9 +10,12 @@ import {
   setSelCompraVenta,
 } from "../../../../../../app/slices/monedasSlice";
 import { addTransaccion } from "../../../../../../app/slices/transaccionesSlice";
+import { setLogoutUser } from "../../../../../../app/slices/userSlice";
 
 const NewTransactionForm = () => {
   const userLogged = useSelector((state) => state.user.user);
+  const dispatchUser = useDispatch();
+
   const { apiKey, id } = userLogged;
   const monedasSelect = useSelector((state) => state.monedas.monedas);
   const dispatchAddTransacciones = useDispatch();
@@ -95,10 +98,13 @@ const NewTransactionForm = () => {
             valor_actual: monedaSeleccionada.cotizacion,
           };
           dispatchAddTransacciones(addTransaccion(tran));
-          //Reseteo:            
+                      
         }
-      } catch (error) {
-        alert("Ha ocurrido un error", error);
+      } catch (error) {       
+        
+        alert("Ha ocurrido un error: "+ error.message);
+        const {status} = error
+        if(status===401)dispatchUser(setLogoutUser())
       }
     }
   };
