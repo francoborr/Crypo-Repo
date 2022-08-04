@@ -62,8 +62,9 @@ const RegistroForm = () => {
 
     if (
       userName !== undefined &&
-      password !== undefined
-      // && departamentoId !== undefined && ciudadId !== undefined
+      password !== undefined &&
+      departamentoId !== 0 &&
+      ciudadId !== 0
     ) {
       try {
         const { apiKey, id } = await registro(
