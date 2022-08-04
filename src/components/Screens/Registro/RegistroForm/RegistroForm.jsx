@@ -9,13 +9,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDepartamentos } from "../../../../app/slices/deptoSlice";
 import { setLoginUser} from "../../../../app/slices/userSlice"
+import { setShowRegistration } from "../../../../app/slices/showRegistrationSlice";
 
 const RegistroForm = () => {
   const inputUserName = useRef();
   const inpuUserPass = useRef();
   const dispatchDepartamentos = useDispatch();
   const dispatchUsuario = useDispatch();
-
+  const dispachShowRegistration = useDispatch();
 
   //let departamentos;
   // const departamentoId = useRef();
@@ -73,6 +74,7 @@ const RegistroForm = () => {
         );
         alert("Éxito al registrar usuario")
         dispatchUsuario(setLoginUser({ apiKey: apiKey, id: id }))
+        dispachShowRegistration(setShowRegistration(false))
 
       } catch (error) {        
         alert(error.message);

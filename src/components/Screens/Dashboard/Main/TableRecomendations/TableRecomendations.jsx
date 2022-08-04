@@ -65,8 +65,8 @@ const TableRecomendations = () => {
     <> 
     <Title title={"Recomendaciones"}></Title>
     
-    <table>
-      <thead>
+    <table className="w-100 text-center table-sm table-bordered table-hover ">
+      <thead className="text-uppercase text-white text-lg bg-dark">
       <tr>
       <th>Moneda</th>
       <th>$ TRN</th>
