@@ -16,10 +16,8 @@ const GraficoParaUnaMoneda= ()=>{
     const [idMdaSeleccionada, setIdMdaSeleccionada] = useState();
 
     const setIdMonedaSelAux = (id) => {
-        const TransaccionesPorMonedaAux = transacciones.filter(tran => tran.moneda == id)
-        console.log("tranPorMoneda", TransaccionesPorMonedaAux)  
-        dispatchTransaccionesPorMoneda(setTransaccionesPorMoneda(TransaccionesPorMonedaAux))      
-        console.log("tran por mda", TransaccionesPorMoneda)
+        const TransaccionesPorMonedaAux = transacciones.filter(tran => tran.moneda == id)        
+        dispatchTransaccionesPorMoneda(setTransaccionesPorMoneda(TransaccionesPorMonedaAux))              
         setIdMdaSeleccionada(id);
     };
 
@@ -55,7 +53,7 @@ const GraficoParaUnaMoneda= ()=>{
         className="mb-3 align-self-start"
         elements={monedasSelect}
         setSelect={setIdMonedaSelAux}
-      />
+      />     
 
       <Chart
       options={obj.options}

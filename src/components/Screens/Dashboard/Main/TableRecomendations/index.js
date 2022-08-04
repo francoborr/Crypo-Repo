@@ -1,0 +1,1 @@
+import TableRecomendation from "./TableRecomendations"
