@@ -5,6 +5,7 @@ import {
 } from "../../../../../app/slices/monedasSlice";
 import { useState } from "react";
 import TableRecomendationsItemRow from "./TableRecomendationsItemRow";
+import Title from "../../../../UI/Title";
 
 
 const TableRecomendations = () => {
@@ -61,6 +62,9 @@ const TableRecomendations = () => {
 
 
   return(
+    <> 
+    <Title title={"Recomendaciones"}></Title>
+    
     <table>
       <thead>
       <tr>
@@ -84,6 +88,7 @@ const TableRecomendations = () => {
       </tbody> }
       
       </table>
+      </>
 
   )
 

@@ -36,13 +36,13 @@ const GraficoParaUnaMoneda= ()=>{
             id: "apexchart-example",
           },
           xaxis: {        
-            categories: TransaccionesPorMoneda.map(tran => tran.id)//ventasPorMoneda.map(moneda=>moneda.moneda.nombre)
+            categories: TransaccionesPorMoneda.map(tran => tran.id)
           },
         },
         series: [
           {
-            name: "Total",
-            data: TransaccionesPorMoneda.map(tran => tran.valor_actual)//ventasPorMoneda.map(moneda=> moneda.total)
+            name: "Precio de la transacción",
+            data: TransaccionesPorMoneda.map(tran => tran.valor_actual)
           },
         ],
       };      
@@ -51,7 +51,7 @@ const GraficoParaUnaMoneda= ()=>{
     return(
         <>
         <div>
-          <Title title={"Gráfico para una Moneda"}></Title>
+        <Title title={"Gráfico para una Moneda"}></Title>
         <Select
         className="mb-3 align-self-start"
         elements={monedasSelect}

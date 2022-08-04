@@ -20,26 +20,39 @@ const Main = () => {
 
   return (
     <>
-      <div className="d-flex justify-content-around">
-          <NewTransaction></NewTransaction>
-          <GraficoParaUnaMoneda></GraficoParaUnaMoneda>
-          <MontoFinal></MontoFinal>
-      </div>    
-      <div className="d-flex justify-content-around">
-          {/* <Chart></Chart>         */}
-        <div className="card p-4 m-4 rounded-lg align-self-start shadow-lg rounded">
-          <GraficoVentaPorMoneda></GraficoVentaPorMoneda>
-        </div>          
-
-        <div className="card p-4 m-4 rounded-lg align-self-start shadow-lg rounded">
-          <GraficoCompraPorMoneda></GraficoCompraPorMoneda>
-        </div>
-        <div>
-        <TableRecomendations></TableRecomendations>
-        </div>
+      <div className='container'>
+       <div className='row'>
+        <div className="d-flex justify-content-around">
+            <MontoFinal></MontoFinal>
+            <div className="card p-4 m-4 rounded-lg align-self-start shadow-lg rounded">
+              <TableRecomendations></TableRecomendations>
+          </div>    
+          <NewTransaction></NewTransaction>          
+        </div>  
+        </div> 
       </div>
 
-      <Table></Table>
+        <div className="d-flex justify-content-around">
+            {/* <Chart></Chart>         */}
+          <div className="card p-2 m-1 rounded-lg align-self-start shadow-lg rounded">
+            <GraficoVentaPorMoneda></GraficoVentaPorMoneda>
+          </div>          
+
+          <div className="card p-2 m-1 rounded-lg align-self-start shadow-lg rounded">
+            <GraficoCompraPorMoneda></GraficoCompraPorMoneda>
+          </div>
+          <div className="card p-2 m-1 rounded-lg align-self-start shadow-lg rounded">
+              <GraficoParaUnaMoneda></GraficoParaUnaMoneda>
+            </div>
+          <div>
+
+          </div>
+        </div>
+        <div className='container'>
+          <div className='row p-4'>
+            <Table ></Table>
+          </div>
+        </div>
     </>
   );
 };
