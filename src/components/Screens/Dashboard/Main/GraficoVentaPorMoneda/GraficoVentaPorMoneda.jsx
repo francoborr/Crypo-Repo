@@ -30,22 +30,37 @@ const ventasPorMoneda = useSelector((state)=> state.monedas.ventasPorMoneda);
     
   }, [transacciones]);
 
+  // const obj = {
+  //   options: {
+  //     chart: {
+  //       id: "apexchart-example",
+  //     },
+  //     xaxis: {        
+  //       categories: ventasPorMoneda.map(moneda=>moneda.moneda.nombre)
+  //     },
+  //   },
+  //   series: [
+  //     {
+  //       name: "Total",
+  //       data: ventasPorMoneda.map(moneda=> moneda.total)
+  //     },
+  //   ],
+  // };
+
+
   const obj = {
+    series: ventasPorMoneda.map(moneda=> moneda.total),
     options: {
       chart: {
-        id: "apexchart-example",
+        height: 350,
+        type: 'pie'
       },
-      xaxis: {        
-        categories: ventasPorMoneda.map(moneda=>moneda.moneda.nombre)
-      },
-    },
-    series: [
-      {
-        name: "Total",
-        data: ventasPorMoneda.map(moneda=> moneda.total)
-      },
-    ],
-  };
+      labels: ventasPorMoneda.map(moneda=>moneda.moneda.nombre),
+      legend: {
+        position: 'bottom'
+      }
+    }
+  }  
 
   return (
     <>
@@ -53,7 +68,7 @@ const ventasPorMoneda = useSelector((state)=> state.monedas.ventasPorMoneda);
             <Chart
         options={obj.options}
         series={obj.series}
-        type="bar"
+        type="pie"
         width={500}
         height={320}
         />

@@ -172,7 +172,7 @@ async function postTransaccion(
         cantidad: cantidad,
         valorActual: valorActual,
       }),
-    });
+    });    
     if (response.status === 200 || response.status === 201) {
       return response.json();
     } else {

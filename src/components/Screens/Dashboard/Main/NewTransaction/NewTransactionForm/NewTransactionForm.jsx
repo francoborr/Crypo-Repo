@@ -44,7 +44,7 @@ const NewTransactionForm = () => {
     dispatchIdMonedaSeleccionada(setIdMonedaSeleccionada(id));
   };
 
-  //const [monedaSeleccionada, setMonedaSeleccionada] = useState(null);
+  
   /****************************************************** */
   /*Para el manejo de la moneda seleccionada*/
   /********************************************************* */
@@ -53,6 +53,7 @@ const NewTransactionForm = () => {
     (state) => state.monedas.monedaSeleccionada
   );
   useEffect(() => {
+    console.log("use effect", idMonedaSeleccionada)
     const monedaAux = monedasSelect.filter(
       (moneda) => moneda.id == idMonedaSeleccionada
     );
@@ -79,33 +80,34 @@ const NewTransactionForm = () => {
       idMonedaSeleccionada != 0 &&
       selCompraVenta != 0
     ) {
-      try {
-        const promesa = await postTransaccion(
-          apiKey,
-          id,
-          selCompraVenta,
-          idMonedaSeleccionada,
-          cantidad.current.value,
-          monedaSeleccionada.cotizacion
-        );
-        alert(promesa.mensaje);
-        if (promesa.codigo == 200) {
-          const tran = {
-            id: promesa.idTransaccion,
-            tipo_operacion: selCompraVenta,
-            moneda: idMonedaSeleccionada,
-            cantidad: cantidad.current.value,
-            valor_actual: monedaSeleccionada.cotizacion,
-          };
-          dispatchAddTransacciones(addTransaccion(tran));
-                      
+        try {          
+          const promesa = await postTransaccion(
+            apiKey,
+            id,
+            selCompraVenta,
+            idMonedaSeleccionada,
+            cantidad.current.value,
+            monedaSeleccionada.cotizacion
+          );
+          alert(promesa.mensaje);
+          if (promesa.codigo == 200) {
+            const tran = {
+              id: promesa.idTransaccion,
+              tipo_operacion: selCompraVenta,
+              moneda: idMonedaSeleccionada,
+              cantidad: cantidad.current.value,
+              valor_actual: monedaSeleccionada.cotizacion,
+            };
+            dispatchAddTransacciones(addTransaccion(tran));                              
+          }
+        } catch (error) {       
+          
+          alert("Ha ocurrido un error: "+ error.message);
+          const {status} = error
+          if(status===401)dispatchUser(setLogoutUser())
         }
-      } catch (error) {       
-        
-        alert("Ha ocurrido un error: "+ error.message);
-        const {status} = error
-        if(status===401)dispatchUser(setLogoutUser())
-      }
+    }else{
+      alert("Complete los datos")
     }
   };
 

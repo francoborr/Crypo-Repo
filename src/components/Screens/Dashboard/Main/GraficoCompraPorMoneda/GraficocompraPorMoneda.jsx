@@ -28,25 +28,42 @@ const comprasPorMoneda = useSelector((state)=> state.monedas.comprasPorMoneda);
           }, 0);        
         return {moneda:mon, total:comprasPesos}
     })    
-    dispatchCompraPorMoneda(setCompraPorMoneda(ComprasPorMonedaAux))    
+    dispatchCompraPorMoneda(setCompraPorMoneda(ComprasPorMonedaAux))
+    console.log(ComprasPorMonedaAux)
   }, [transacciones]);
 
-  const obj = {
-    options: {
-      chart: {
-        id: "apexchart-example",
-      },
-      xaxis: {        
-        categories: comprasPorMoneda.map(moneda=>moneda.moneda.nombre)
-      },
-    },
-    series: [
-      {
-        name: "Total",
-        data: comprasPorMoneda.map(moneda=> moneda.total)
-      },
-    ],
-  };
+  // const obj = {
+  //   options: {
+  //     chart: {
+  //       id: "apexchart-example",
+  //     },
+  //     xaxis: {        
+  //       categories: comprasPorMoneda.map(moneda=>moneda.moneda.nombre)
+  //     },
+  //   },
+  //   series: [
+  //     {
+  //       name: "Total",
+  //       data: comprasPorMoneda.map(moneda=> moneda.total)
+  //     },
+  //   ],
+  // };
+
+  
+    const obj = {
+      series: comprasPorMoneda.map(moneda=> moneda.total),
+      options: {
+        chart: {
+          height: 350,
+          type: 'pie'
+        },
+        labels: comprasPorMoneda.map(moneda=>moneda.moneda.nombre),
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
+  
 
   return (
     <>
@@ -54,7 +71,7 @@ const comprasPorMoneda = useSelector((state)=> state.monedas.comprasPorMoneda);
             <Chart
         options={obj.options}
         series={obj.series}
-        type="bar"
+        type="pie"
         width={500}
         height={320}
         />
