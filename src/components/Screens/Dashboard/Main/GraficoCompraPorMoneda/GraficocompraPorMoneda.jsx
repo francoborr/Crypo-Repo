@@ -28,8 +28,7 @@ const comprasPorMoneda = useSelector((state)=> state.monedas.comprasPorMoneda);
           }, 0);        
         return {moneda:mon, total:comprasPesos}
     })    
-    dispatchCompraPorMoneda(setCompraPorMoneda(ComprasPorMonedaAux))
-    console.log(ComprasPorMonedaAux)
+    dispatchCompraPorMoneda(setCompraPorMoneda(ComprasPorMonedaAux))    
   }, [transacciones]);
 
   const obj = {

@@ -21,18 +21,15 @@ export const monedasSlice = createSlice({
     },
     setMonedaSeleccionada: (state, action) => {
       const { payload } = action;
-      state.monedaSeleccionada = payload;
-      console.log("setMonedaSeleccionada ", payload);
+      state.monedaSeleccionada = payload;      
     },
     setIdMonedaSeleccionada: (state, action) => {
       const { payload } = action;
-      state.idMonedaSeleccionada = payload;
-      console.log("setIdMonedaSeleccionada ", payload);
+      state.idMonedaSeleccionada = payload;      
     },
     setSelCompraVenta: (state, action) => {
       const { payload } = action;
-      state.selCompraVenta = payload;
-      console.log("setSelCompraVenta ", payload);
+      state.selCompraVenta = payload;      
     },
     setCompraPorMoneda :(state, action) =>{
       const {payload} = action;
@@ -44,8 +41,7 @@ export const monedasSlice = createSlice({
     },
     setTransaccionesPorMoneda:(state, action)=>{
       const {payload} = action;
-      state.transaccionesPorMoneda = payload;
-      console.log("setTransaccionesPorMoneda", payload)
+      state.transaccionesPorMoneda = payload;      
     },
 
     setMonedasConTodasTransacciones:(state,action)=>{

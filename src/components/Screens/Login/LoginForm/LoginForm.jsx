@@ -30,19 +30,14 @@ const LoginForm = () => {
 
   const [verBtnLogin, setVerBtnLogin] = useState(false);
   const veBtnLogin = () => {
-    console.log("inputUserName", inputUserName.current.value);
-    console.log("inputPassword", inputPassword.current.value);
     if (
       inputPassword.current.value != "" &&
       inputUserName.current.value != ""
     ) {
-      setVerBtnLogin(true);
-      console.log("Cambio a true");
+      setVerBtnLogin(true);      
     } else {
-      setVerBtnLogin(false);
-      console.log("Cambio a false");
-    }
-    console.log("VerBTNLOGIN", verBtnLogin);
+      setVerBtnLogin(false);      
+    }    
   };
 
   useEffect(() => {

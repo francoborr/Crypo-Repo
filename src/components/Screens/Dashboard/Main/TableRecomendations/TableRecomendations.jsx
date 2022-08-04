@@ -20,8 +20,7 @@ const TableRecomendations = () => {
   const transacciones = useSelector((state) => state.transacciones.transacciones)
   const monedasConSusTransacciones = useSelector ((state)=> state.monedas.monedasConSusTransacciones)
 
-  useEffect(()=>{
-    console.log("useEffect", transacciones, monedas)
+  useEffect(()=>{    
 
     const trnPorMoneda = monedas.map( moneda =>{
         const transaccionesAux = transacciones.filter(tran => tran.moneda == moneda.id)
@@ -56,10 +55,6 @@ const TableRecomendations = () => {
 
     setRecomendacionesCompra(recomendacionesCompraAux);
     setRecomendacionesVenta(recomendacionesVentaAux);
-
-    console.log("recomendaciones Compra aux",recomendacionesCompraAux, monedas, transacciones )   
-
-
     //console.log("recom",recomendaciones)
   },[monedasConSusTransacciones])  
 

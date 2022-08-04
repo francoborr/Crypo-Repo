@@ -10,8 +10,7 @@ export const userSlice = createSlice({
   reducers: {
     setLoginUser: (state, action) => {
       const { payload } = action; //Me quedo con el usuario que llega
-      state.user = payload;
-      console.log("Usuario logeado");
+      state.user = payload;      
     },
     setLogoutUser: (state) => {
       state.user = null;

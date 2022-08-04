@@ -12,7 +12,6 @@ export const transaccionesSlice = createSlice({
   reducers: {
     setTransacciones: (state, action) => {
       const { payload } = action;
-      console.log("setTransacciones", payload);
       state.transacciones = payload;
     },
 

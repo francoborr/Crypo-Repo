@@ -45,7 +45,7 @@ const RegistroForm = () => {
       (async () => {
         const { ciudades } = await getCiudad(deptoSel);
         setCiudades(ciudades);
-        console.log("Ciudades ", deptoSel, ciudades);
+        
       })();
     } catch (error) {
       alert("Ha ocurrido un error", error);
@@ -74,9 +74,8 @@ const RegistroForm = () => {
         alert("Éxito al registrar usuario")
         dispatchUsuario(setLoginUser({ apiKey: apiKey, id: id }))
 
-      } catch (error) {
-        console.log(error)
-        alert(error);
+      } catch (error) {        
+        alert(error.message);
       }
     } else {
       alert("No pueden existir campos vacios");

@@ -1,5 +1,4 @@
-const TableRecomendationsItemRow = ({monedaTransaccion, action}) => {  
-  console.log("transaccion en item row", monedaTransaccion, action)
+const TableRecomendationsItemRow = ({monedaTransaccion, action}) => {    
   return (
 <tr className="table">
     

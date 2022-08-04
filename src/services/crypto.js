@@ -2,6 +2,9 @@ const CRYPTO = "https://crypto.develotion.com";
 
 //* Usuarios
 async function registro(user, password, idDepartamento, idCiudad) {
+  try{
+
+  
   const response = await fetch(`${CRYPTO}/usuarios.php`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -20,11 +23,14 @@ async function registro(user, password, idDepartamento, idCiudad) {
       status: response.status,
     });
   }
+  }catch(error){
+    return Promise.reject(error);
+  }
+
 }
 
 async function login(user, pass) {
-  try {
-    console.log("Envio", user, pass);
+  try {    
     const response = await fetch(`${CRYPTO}/login.php`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -34,7 +40,7 @@ async function login(user, pass) {
       }),
     });
 
-    console.log("devuelve ", response);
+    
     if (response.status === 200 || response.status === 201) {
       return response.json();
     } else {

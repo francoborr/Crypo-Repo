@@ -4,9 +4,7 @@ import { useRef } from "react";
 
 const Select = ({ elements, setSelect, className }) => {
   const optionSelected = useRef();
-  const handleChange = () => {
-    //setDeptoSel(departamentoSeleccionado);
-    console.log("Seleccionado ", optionSelected.current.value);
+  const handleChange = () => {        
     setSelect(optionSelected.current.value);
   };
 

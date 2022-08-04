@@ -3,6 +3,7 @@ import Select from "../../../../UI/Select";
 import Chart from "react-apexcharts";
 import { setTransaccionesPorMoneda } from "../../../../../app/slices/monedasSlice";
 import { useEffect, useState } from "react";
+import Title from "../../../../UI/Title";
 
 const GraficoParaUnaMoneda= ()=>{
     const monedasSelect = useSelector((state) => state.monedas.monedas);
@@ -49,20 +50,22 @@ const GraficoParaUnaMoneda= ()=>{
 
     return(
         <>
+        <div>
+          <Title title={"Gráfico para una Moneda"}></Title>
         <Select
         className="mb-3 align-self-start"
         elements={monedasSelect}
         setSelect={setIdMonedaSelAux}
       />     
-
-      <Chart
+      {TransaccionesPorMoneda.length>0? <Chart
       options={obj.options}
       series={obj.series}
       type="bar"
       width={500}
       height={320}
-      />      
-
+      /> : <p>No hay datos</p>}
+          
+      </div>
         </>
 
     )

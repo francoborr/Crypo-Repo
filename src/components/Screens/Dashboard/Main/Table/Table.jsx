@@ -34,7 +34,7 @@ const Table = () => {
   }, []);
 
   useEffect(() => {
-    console.log(transacciones);
+    
     const transaccionesAux = transacciones.map((transaccion) => {
       const monedaAux = monedas.filter(
         (moneda) => moneda.id == transaccion.moneda
@@ -54,7 +54,7 @@ const Table = () => {
     dispatchTransaccionesDescripcion(
       setTransaccionesDescripcion(transaccionesAux)
     );
-    console.log(transaccionesAux);
+    
   }, [monedas, transacciones]);
 
   return (

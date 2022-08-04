@@ -18,11 +18,11 @@ const NewTransactionForm = () => {
   const dispatchAddTransacciones = useDispatch();
 
   const dispatchMonedas = useDispatch(); //Lista de monedas
+
   useEffect(() => {
     try {
       (async () => {
-        const { monedas } = await getMonedas(apiKey);
-        console.log("monedas ", monedas);
+        const { monedas } = await getMonedas(apiKey);        
         dispatchMonedas(setMonedas(monedas));
       })();
     } catch (error) {
@@ -37,8 +37,7 @@ const NewTransactionForm = () => {
   const idMonedaSeleccionada = useSelector(
     (state) => state.monedas.idMonedaSeleccionada
   );
-  const setIdMonedaSelAux = (id) => {
-    console.log("Cambio moneda Seleccionada", id);
+  const setIdMonedaSelAux = (id) => {    
     dispatchIdMonedaSeleccionada(setIdMonedaSeleccionada(id));
   };
 
@@ -96,6 +95,7 @@ const NewTransactionForm = () => {
             valor_actual: monedaSeleccionada.cotizacion,
           };
           dispatchAddTransacciones(addTransaccion(tran));
+          //Reseteo:            
         }
       } catch (error) {
         alert("Ha ocurrido un error", error);
