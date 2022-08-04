@@ -71,7 +71,7 @@ const TableRecomendations = () => {
       <tr>
       <th>Moneda</th>
       <th>$ TRN</th>
-      <th>$ Actual</th>
+      <th>S$ Actual</th>
       <th>Recomendacion</th>
 
      </tr>
