@@ -10,7 +10,9 @@ import TableRecomendationsItemRow from "./TableRecomendationsItemRow";
 const TableRecomendations = () => {
 
   const dispatchMonedasConTodasTransacciones = useDispatch();
-  const [monedasUltimaTransaccion, setMonedasUltimaTransaccion] = useState([]);
+  
+  const [recomendacionesCompra, setRecomendacionesCompra] = useState([])
+  const [recomendacionesVenta, setRecomendacionesVenta] = useState([])
   
 
 
@@ -19,6 +21,8 @@ const TableRecomendations = () => {
   const monedasConSusTransacciones = useSelector ((state)=> state.monedas.monedasConSusTransacciones)
 
   useEffect(()=>{
+    console.log("useEffect", transacciones, monedas)
+
     const trnPorMoneda = monedas.map( moneda =>{
         const transaccionesAux = transacciones.filter(tran => tran.moneda == moneda.id)
         return {moneda: moneda, transacciones:transaccionesAux}
@@ -28,17 +32,35 @@ const TableRecomendations = () => {
       return moneda.transacciones.length>0
     })
     dispatchMonedasConTodasTransacciones(setMonedasConTodasTransacciones(monedasCompradas))
-  },[transacciones])
+
+    
+  },[transacciones, monedas])
 
 
 
   
-  useEffect(()=>{
+   useEffect(()=>{
    const monedasUltimaTransaccionAux = monedasConSusTransacciones.map((monedaTran)=>{       
         return {moneda : monedaTran.moneda, transaccion:monedaTran.transacciones[monedaTran.transacciones.length-1]}
     })
-    setMonedasUltimaTransaccion(monedasUltimaTransaccionAux)
-    console.log("pepito",monedasUltimaTransaccionAux)
+    
+      
+
+    const recomendacionesCompraAux = monedasUltimaTransaccionAux.filter(moneda => {
+      return moneda.moneda.cotizacion < moneda.transaccion.valor_actual && moneda.transaccion.tipo_operacion==2
+    })
+    const recomendacionesVentaAux = monedasUltimaTransaccionAux.filter(moneda => {
+      return moneda.moneda.cotizacion > moneda.transaccion.valor_actual && moneda.transaccion.tipo_operacion==1 
+    })
+
+
+    setRecomendacionesCompra(recomendacionesCompraAux);
+    setRecomendacionesVenta(recomendacionesVentaAux);
+
+    console.log("recomendaciones Compra aux",recomendacionesCompraAux, monedas, transacciones )   
+
+
+    //console.log("recom",recomendaciones)
   },[monedasConSusTransacciones])  
 
 
@@ -48,18 +70,23 @@ const TableRecomendations = () => {
       <thead>
       <tr>
       <th>Moneda</th>
-      <th>Precio comprado</th>
-      <th>Precio Actual</th>
+      <th>$ TRN</th>
+      <th>$ Actual</th>
       <th>Recomendacion</th>
 
      </tr>
       </thead>
-      <tbody>
-        {monedasUltimaTransaccion.map((monedaTransaccion)=>{
-        <TableRecomendationsItemRow monedaTransaccion={monedaTransaccion}/>
-      //console.log("entre", monedaTransaccion)
-        })}
-      </tbody>
+      { <tbody>
+        {recomendacionesCompra.map((monedaTransaccion)=>(
+        <TableRecomendationsItemRow monedaTransaccion={monedaTransaccion} action="Comprar"/>      
+        ))}
+
+        {recomendacionesVenta.map((monedaTransaccion)=>(
+        <TableRecomendationsItemRow monedaTransaccion={monedaTransaccion} action ="Vender"/>      
+        ))}
+
+      
+      </tbody> }
       
       </table>
 
