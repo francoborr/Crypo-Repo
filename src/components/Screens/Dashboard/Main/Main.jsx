@@ -39,11 +39,14 @@ const Main = () => {
         <div className="card p-2 m-1 rounded-lg align-self-start shadow-lg rounded">
           <GraficoCompraPorMoneda></GraficoCompraPorMoneda>
         </div>
-        <div className="card p-2 m-1 rounded-lg align-self-start shadow-lg rounded">
+        </div>
+
+        <div className="d-flex justify-content-center">
+        <div className="d-flex p-2 m-5 w-50 rounded-lg align-self-start shadow-lg rounded">
           <GraficoParaUnaMoneda></GraficoParaUnaMoneda>
         </div>
-        <div></div>
-      </div>
+        </div>
+
       <div className="container">
         <div className="row p-4">
           <Table></Table>

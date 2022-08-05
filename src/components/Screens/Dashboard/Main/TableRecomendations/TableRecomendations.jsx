@@ -10,7 +10,7 @@ import Title from "../../../../UI/Title";
 
 const TableRecomendations = () => {
 
-  const dispatchMonedasConTodasTransacciones = useDispatch();
+  const dispatch = useDispatch();
   
   const [recomendacionesCompra, setRecomendacionesCompra] = useState([])
   const [recomendacionesVenta, setRecomendacionesVenta] = useState([])
@@ -31,7 +31,7 @@ const TableRecomendations = () => {
     const monedasCompradas = trnPorMoneda.filter(moneda => {
       return moneda.transacciones.length>0
     })
-    dispatchMonedasConTodasTransacciones(setMonedasConTodasTransacciones(monedasCompradas))
+    dispatch(setMonedasConTodasTransacciones(monedasCompradas))
 
     
   },[transacciones, monedas])
@@ -42,21 +42,15 @@ const TableRecomendations = () => {
    useEffect(()=>{
    const monedasUltimaTransaccionAux = monedasConSusTransacciones.map((monedaTran)=>{       
         return {moneda : monedaTran.moneda, transaccion:monedaTran.transacciones[monedaTran.transacciones.length-1]}
-    })
-    
-      
-
+    })       
     const recomendacionesCompraAux = monedasUltimaTransaccionAux.filter(moneda => {
       return moneda.moneda.cotizacion < moneda.transaccion.valor_actual && moneda.transaccion.tipo_operacion==2
     })
     const recomendacionesVentaAux = monedasUltimaTransaccionAux.filter(moneda => {
       return moneda.moneda.cotizacion > moneda.transaccion.valor_actual && moneda.transaccion.tipo_operacion==1 
     })
-
-
     setRecomendacionesCompra(recomendacionesCompraAux);
     setRecomendacionesVenta(recomendacionesVentaAux);
-    //console.log("recom",recomendaciones)
   },[monedasConSusTransacciones])  
 
 
