@@ -2,9 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   monedas: [],
-  //monedaSeleccionada: null,
-  //idMonedaSeleccionada: 0,
-  //selCompraVenta: 0,
   comprasPorMoneda: [],
   ventasPorMoneda: [],
   transaccionesPorMoneda:[],
@@ -18,18 +15,6 @@ export const monedasSlice = createSlice({
     setMonedas: (state, action) => {
       const { payload } = action;
       state.monedas = payload;
-    },
-    setMonedaSeleccionada: (state, action) => {
-      const { payload } = action;
-      state.monedaSeleccionada = payload;      
-    },
-    setIdMonedaSeleccionada: (state, action) => {
-      const { payload } = action;
-      state.idMonedaSeleccionada = payload;      
-    },
-    setSelCompraVenta: (state, action) => {
-      const { payload } = action;
-      state.selCompraVenta = payload;      
     },
     setCompraPorMoneda :(state, action) =>{
       const {payload} = action;

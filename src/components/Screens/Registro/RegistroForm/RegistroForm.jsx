@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDepartamentos, setCiudades } from "../../../../app/slices/locationSlice";
 import { setLoginUser} from "../../../../app/slices/userSlice"
-import { setShowRegistration } from "../../../../app/slices/showRegistrationSlice";
+
 
 const RegistroForm = () => {
   const inputUserName = useRef();
@@ -69,8 +69,7 @@ const RegistroForm = () => {
           ciudadId
         );
         alert("Éxito al registrar usuario")
-        dispatch(setLoginUser({ apiKey: apiKey, id: id }))
-        dispatch(setShowRegistration(false))
+        dispatch(setLoginUser({ apiKey: apiKey, id: id }))       
 
       } catch (error) {        
         alert(error.message);

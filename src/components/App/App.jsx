@@ -1,8 +1,8 @@
-// import logo from './logo.svg';
-// import './App.css';
-import { useState } from "react";
 import Login from "../Screens/Login/Login";
+import { Route, Routes } from 'react-router-dom'
 import Dashboard from "../Screens/Dashboard/Dashboard";
+import PrivateRoute from '../Screens/PrivateRoute'
+
 
 import "bootstrap-css-only";
 import Registro from "../Screens/Registro/Registro";
@@ -13,7 +13,20 @@ function App() {
 
   return (
     <div className="App bg-light w-100 h-100 ">
-      {!userLogged ? <Login /> : <Dashboard></Dashboard>}
+      <Routes>
+        <Route path='/' element={<Login/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/registro' element={<Registro/>}/>
+        <Route
+          path='/dashboard'
+          element={
+            <PrivateRoute user={userLogged}>
+              <Dashboard/>
+            </PrivateRoute>
+          }
+        />        
+      </Routes>
+      
     </div>
   );
 }

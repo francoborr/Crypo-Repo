@@ -1,17 +1,28 @@
 import Button from "../../UI/Button/Button";
 import LoginForm from "./LoginForm";
 import Title from "../../UI/Title";
-import React, { useState } from "react";
-import Registro from "../Registro/Registro";
-import { useDispatch, useSelector } from "react-redux";
-import { setShowRegistration } from "../../../app/slices/showRegistrationSlice";
-const Login = () => {
-  const showRegistration = useSelector(
-    (state) => state.showRegistration.showRegistration
-  );
-  const dispachShowRegistration = useDispatch();
 
-  const login = (
+import { useNavigate } from 'react-router-dom'  
+import { useSelector } from "react-redux";
+
+import { useEffect } from "react";
+const Login = () => {
+
+  const user = useSelector(state => state.user.user)
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard/')
+    }
+  }, [user, navigate])
+
+  const onHandleClick = ()=>{
+    navigate('/registro/')
+  }
+
+
+ return (
+  <section className="d-flex flex-md justify-content-center login ">
     <div className="card p-3 mx-auto m-5 shadow-lg bg-white ">
       <Title className="text-center m-2 font-weight-bolder" title="Login" />
       <hr />
@@ -19,24 +30,17 @@ const Login = () => {
         <LoginForm />
         {
           <Button
-            onHandleClick={() => {
-              dispachShowRegistration(setShowRegistration(!showRegistration));
-            }}
+            onHandleClick={onHandleClick}
             cta="Registrarse"
             classColor={`mt-4 w-100 bg-dark ${"btn-primary"}`}
           ></Button>
         }
       </section>
     </div>
+    </section>
   );
 
-  return (
-    <>
-      <section className="d-flex flex-md justify-content-center login ">
-        <div>{showRegistration ? <Registro /> : login}</div>
-      </section>
-    </>
-  );
+ 
 };
 
 export default Login;

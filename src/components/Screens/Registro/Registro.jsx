@@ -1,18 +1,29 @@
 import RegistroForm from "./RegistroForm/RegistroForm";
 import Title from "../../UI/Title/Title";
 import Button from "../../UI/Button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { setShowRegistration } from "../../../app/slices/showRegistrationSlice";
+import {useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom'  
+import { useEffect } from "react";
+
 
 const Registro = ({ onRegisterUser }) => {
-  const showRegistration = useSelector(
-    (state) => state.showRegistration.showRegistration
-  );
-  const dispachShowRegistration = useDispatch();
+  const user = useSelector(state => state.user.user)
+  
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard/')
+    }
+  }, [user, navigate])
+
+  const onHandleClick = ()=>{
+    navigate('/login/')
+  }  
+
 
   return (
     <>
-      <section className="m-5">
+      <section className="d-flex flex-md justify-content-center login ">
         <div className="card p-4 shadow-lg rounded bg-white">
           <Title
             title="Registro"
@@ -24,9 +35,7 @@ const Registro = ({ onRegisterUser }) => {
             cta="Volver"
             className="bg-danger"
             classColor={"btn-primary"}
-            onHandleClick={() => {
-              dispachShowRegistration(setShowRegistration(!showRegistration));
-            }}
+            onHandleClick={onHandleClick}
           />
         </div>
       </section>
