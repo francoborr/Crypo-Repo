@@ -6,13 +6,11 @@ import Title from "../../../../UI/Title";
 
 
 const GraficoCompraPorMoneda = () => {
-    const dispatchCompraPorMoneda = useDispatch();
+    const dispatch = useDispatch();
 
   const transacciones = useSelector(
     (state) => state.transacciones.transacciones
   );
-//   const compras = useSelector((state) => state.transacciones.cantidadCompras);
-//   const ventas = useSelector((state) => state.transacciones.cantidadVentas);
 
 const monedas = useSelector((state)=> state.monedas.monedas)
 const comprasPorMoneda = useSelector((state)=> state.monedas.comprasPorMoneda);
@@ -28,27 +26,8 @@ const comprasPorMoneda = useSelector((state)=> state.monedas.comprasPorMoneda);
           }, 0);        
         return {moneda:mon, total:comprasPesos}
     })    
-    dispatchCompraPorMoneda(setCompraPorMoneda(ComprasPorMonedaAux))
-    console.log(ComprasPorMonedaAux)
-  }, [transacciones]);
-
-  // const obj = {
-  //   options: {
-  //     chart: {
-  //       id: "apexchart-example",
-  //     },
-  //     xaxis: {        
-  //       categories: comprasPorMoneda.map(moneda=>moneda.moneda.nombre)
-  //     },
-  //   },
-  //   series: [
-  //     {
-  //       name: "Total",
-  //       data: comprasPorMoneda.map(moneda=> moneda.total)
-  //     },
-  //   ],
-  // };
-
+    dispatch(setCompraPorMoneda(ComprasPorMonedaAux))    
+  }, [transacciones, monedas]);
   
     const obj = {
       series: comprasPorMoneda.map(moneda=> moneda.total),

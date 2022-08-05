@@ -1,66 +1,43 @@
 import Select from "../../../../../UI/Select";
 import Button from "../../../../../UI/Button/Button";
 import { useEffect, useRef } from "react";
-import { getMonedas, postTransaccion } from "../../../../../../services/crypto";
+import {postTransaccion } from "../../../../../../services/crypto";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setMonedas,
-  setMonedaSeleccionada,
-  setIdMonedaSeleccionada,
-  setSelCompraVenta,
-} from "../../../../../../app/slices/monedasSlice";
+
 import { addTransaccion } from "../../../../../../app/slices/transaccionesSlice";
 import { setLogoutUser } from "../../../../../../app/slices/userSlice";
+import { useState } from "react";
 
 const NewTransactionForm = () => {
   const userLogged = useSelector((state) => state.user.user);
-  const dispatchUser = useDispatch();
+  const dispatch = useDispatch();
 
   const { apiKey, id } = userLogged;
-  const monedasSelect = useSelector((state) => state.monedas.monedas);
-  const dispatchAddTransacciones = useDispatch();
+  const monedas = useSelector((state) => state.monedas.monedas); 
+ 
+  const [idMonedaSeleccionada, setIdMonedaSeleccionada] = useState(0); 
+  const [idCompraVenta, setIdCompraVenta]   = useState(0);
 
+  const [monedaSeleccionada, setMonedaSeleccionada] = useState(null);
 
-
-  /****************************************************** */
-  /*Para el manejo del id de la moneda seleccionada*/
-  /********************************************************* */
-  const dispatchIdMonedaSeleccionada = useDispatch();
-  const idMonedaSeleccionada = useSelector(
-    (state) => state.monedas.idMonedaSeleccionada
-  );
-  const setIdMonedaSelAux = (id) => {    
-    dispatchIdMonedaSeleccionada(setIdMonedaSeleccionada(id));
-  };
-
-  
-  /****************************************************** */
-  /*Para el manejo de la moneda seleccionada*/
-  /********************************************************* */
-  const dispatchMonedaSeleccionada = useDispatch();
-  const monedaSeleccionada = useSelector(
-    (state) => state.monedas.monedaSeleccionada
-  );
-  useEffect(() => {
-    console.log("use effect", idMonedaSeleccionada)
-    const monedaAux = monedasSelect.filter(
+  useEffect(() => {    
+    const monedaAux = monedas.filter(
       (moneda) => moneda.id == idMonedaSeleccionada
     );
     const [moneda] = monedaAux;
-    dispatchMonedaSeleccionada(setMonedaSeleccionada(moneda));
+    setMonedaSeleccionada(moneda)
   }, [idMonedaSeleccionada]);
 
   const cantidad = useRef();
+
   const compraVenta = [
     { id: 1, nombre: "Comprar" },
     { id: 2, nombre: "Vender" },
   ];
 
-  const dispatchCompraVenta = useDispatch();
-  const selCompraVenta = useSelector((state) => state.monedas.selCompraVenta);
-  const setSelCompraVentaAux = (idCompraVenta) => {
-    dispatchCompraVenta(setSelCompraVenta(idCompraVenta));
-  };
+  
+  
+
 
   const onHandleNewTransaction = async (e) => {
     e.preventDefault();
@@ -70,13 +47,13 @@ const NewTransactionForm = () => {
     }else{
       if (
         idMonedaSeleccionada != 0 &&
-        selCompraVenta != 0
+        idCompraVenta != 0
       ) {
           try {          
             const promesa = await postTransaccion(
               apiKey,
               id,
-              selCompraVenta,
+              idCompraVenta,
               idMonedaSeleccionada,
               cantidad.current.value,
               monedaSeleccionada.cotizacion
@@ -85,18 +62,18 @@ const NewTransactionForm = () => {
             if (promesa.codigo == 200) {
               const tran = {
                 id: promesa.idTransaccion,
-                tipo_operacion: selCompraVenta,
+                tipo_operacion: idCompraVenta,
                 moneda: idMonedaSeleccionada,
                 cantidad: cantidad.current.value,
                 valor_actual: monedaSeleccionada.cotizacion,
               };
-              dispatchAddTransacciones(addTransaccion(tran));                              
+              dispatch(addTransaccion(tran));                              
             }
           } catch (error) {       
             
             alert("Ha ocurrido un error: "+ error.message);
             const {status} = error
-            if(status===401)dispatchUser(setLogoutUser())
+            if(status===401) dispatch(setLogoutUser())
           }
       }else{
         alert("Complete los datos")
@@ -114,15 +91,15 @@ const NewTransactionForm = () => {
         <Select
           className="mb-3"
           elements={compraVenta}
-          setSelect={setSelCompraVentaAux}
+          setSelect={setIdCompraVenta}
         />
         <br />
         <label >Moneda</label>
         <br />
         <Select
           className="mb-3"
-          elements={monedasSelect}
-          setSelect={setIdMonedaSelAux}
+          elements={monedas}
+          setSelect={setIdMonedaSeleccionada}
         />
         <div>
           {monedaSeleccionada ? (
@@ -138,9 +115,9 @@ const NewTransactionForm = () => {
         <br />
         <Button
           className="mt-3 w-100 bg-success"
-          cta={`${selCompraVenta == 1 ? "Comprar" : "Vender"} `}
+          cta={`${idCompraVenta == 1 ? "Comprar" : "Vender"} `}
           classColor={`${
-            selCompraVenta == 1
+            idCompraVenta == 1
               ? "bg-success text-white"
               : "bg-danger text-white"
           } `}

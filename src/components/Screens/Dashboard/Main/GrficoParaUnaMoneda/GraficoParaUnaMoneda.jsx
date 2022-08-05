@@ -12,13 +12,13 @@ const GraficoParaUnaMoneda= ()=>{
       );
 
 
-    const dispatchTransaccionesPorMoneda = useDispatch();
+    const dispatch = useDispatch();
     const TransaccionesPorMoneda = useSelector((state)=> state.monedas.transaccionesPorMoneda)
     const [idMdaSeleccionada, setIdMdaSeleccionada] = useState();
 
     const setIdMonedaSelAux = (id) => {
         const TransaccionesPorMonedaAux = transacciones.filter(tran => tran.moneda == id)        
-        dispatchTransaccionesPorMoneda(setTransaccionesPorMoneda(TransaccionesPorMonedaAux))              
+        dispatch(setTransaccionesPorMoneda(TransaccionesPorMonedaAux))              
         setIdMdaSeleccionada(id);
     };
 

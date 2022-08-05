@@ -1,10 +1,7 @@
-import { useDispatch } from "react-redux";
-const TableItemRow = ({ transaccion }) => {
-  const dispatch = useDispatch();
 
-
+const TableItemRow = ({ transaccion }) => { 
   return (
-    <tr className={`table-${transaccion.tipo_operacion === "Compra" ? "success" : "danger"
+    <tr  className={`table-${transaccion.tipo_operacion === "Compra" ? "success" : "danger"
       }`}
     >
       <td>{transaccion.tipo_operacion}</td>

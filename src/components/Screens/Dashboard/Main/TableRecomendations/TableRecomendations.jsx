@@ -71,11 +71,11 @@ const TableRecomendations = () => {
       </thead>
       { <tbody>
         {recomendacionesCompra.map((monedaTransaccion)=>(
-        <TableRecomendationsItemRow monedaTransaccion={monedaTransaccion} action="Comprar"/>      
+        <TableRecomendationsItemRow key={monedaTransaccion.transaccion.id} monedaTransaccion={monedaTransaccion} action="Comprar"/>      
         ))}
 
         {recomendacionesVenta.map((monedaTransaccion)=>(
-        <TableRecomendationsItemRow monedaTransaccion={monedaTransaccion} action ="Vender"/>      
+        <TableRecomendationsItemRow key={monedaTransaccion.transaccion.id} monedaTransaccion={monedaTransaccion} action ="Vender"/>      
         ))}
 
       

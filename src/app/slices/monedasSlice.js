@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   monedas: [],
-  monedaSeleccionada: null,
-  idMonedaSeleccionada: 0,
-  selCompraVenta: 0,
+  //monedaSeleccionada: null,
+  //idMonedaSeleccionada: 0,
+  //selCompraVenta: 0,
   comprasPorMoneda: [],
   ventasPorMoneda: [],
   transaccionesPorMoneda:[],

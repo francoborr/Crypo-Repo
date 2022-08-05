@@ -6,7 +6,7 @@ import Title from "../../../../UI/Title";
 
 
 const GraficoVentaPorMoneda = () => {
-    const dispatchVentaPorMoneda = useDispatch();
+    const dispatch = useDispatch();
 
   const transacciones = useSelector(
     (state) => state.transacciones.transacciones
@@ -26,26 +26,9 @@ const ventasPorMoneda = useSelector((state)=> state.monedas.ventasPorMoneda);
           }, 0);        
         return {moneda:mon, total:ventaPesos}
     })    
-    dispatchVentaPorMoneda(setVentaPorMoneda(ventasPorMonedaAux))
+    dispatch(setVentaPorMoneda(ventasPorMonedaAux))
     
-  }, [transacciones]);
-
-  // const obj = {
-  //   options: {
-  //     chart: {
-  //       id: "apexchart-example",
-  //     },
-  //     xaxis: {        
-  //       categories: ventasPorMoneda.map(moneda=>moneda.moneda.nombre)
-  //     },
-  //   },
-  //   series: [
-  //     {
-  //       name: "Total",
-  //       data: ventasPorMoneda.map(moneda=> moneda.total)
-  //     },
-  //   ],
-  // };
+  }, [transacciones, monedas]);
 
 
   const obj = {

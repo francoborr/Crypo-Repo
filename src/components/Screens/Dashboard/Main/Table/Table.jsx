@@ -57,7 +57,7 @@ const Table = () => {
       </thead>
       <tbody>
         {transaccionesDescripcion.map((transaccion) => (
-          <TableItemRow transaccion={transaccion} />
+          <TableItemRow transaccion={transaccion} key={transaccion.id} />
         ))}
       </tbody>
     </table>
