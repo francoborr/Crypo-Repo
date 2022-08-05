@@ -75,40 +75,46 @@ const NewTransactionForm = () => {
 
   const onHandleNewTransaction = async (e) => {
     e.preventDefault();
-    if (
-      cantidad.current.value != 0 &&
-      idMonedaSeleccionada != 0 &&
-      selCompraVenta != 0
-    ) {
-        try {          
-          const promesa = await postTransaccion(
-            apiKey,
-            id,
-            selCompraVenta,
-            idMonedaSeleccionada,
-            cantidad.current.value,
-            monedaSeleccionada.cotizacion
-          );
-          alert(promesa.mensaje);
-          if (promesa.codigo == 200) {
-            const tran = {
-              id: promesa.idTransaccion,
-              tipo_operacion: selCompraVenta,
-              moneda: idMonedaSeleccionada,
-              cantidad: cantidad.current.value,
-              valor_actual: monedaSeleccionada.cotizacion,
-            };
-            dispatchAddTransacciones(addTransaccion(tran));                              
-          }
-        } catch (error) {       
-          
-          alert("Ha ocurrido un error: "+ error.message);
-          const {status} = error
-          if(status===401)dispatchUser(setLogoutUser())
-        }
+    
+    if(cantidad.current.value <= 0 || cantidad.current.value %1 != 0 ){
+        alert( "La cantidad debe ser mayor a 0 y entera")
     }else{
-      alert("Complete los datos")
+      if (
+        idMonedaSeleccionada != 0 &&
+        selCompraVenta != 0
+      ) {
+          try {          
+            const promesa = await postTransaccion(
+              apiKey,
+              id,
+              selCompraVenta,
+              idMonedaSeleccionada,
+              cantidad.current.value,
+              monedaSeleccionada.cotizacion
+            );
+            alert(promesa.mensaje);
+            if (promesa.codigo == 200) {
+              const tran = {
+                id: promesa.idTransaccion,
+                tipo_operacion: selCompraVenta,
+                moneda: idMonedaSeleccionada,
+                cantidad: cantidad.current.value,
+                valor_actual: monedaSeleccionada.cotizacion,
+              };
+              dispatchAddTransacciones(addTransaccion(tran));                              
+            }
+          } catch (error) {       
+            
+            alert("Ha ocurrido un error: "+ error.message);
+            const {status} = error
+            if(status===401)dispatchUser(setLogoutUser())
+          }
+      }else{
+        alert("Complete los datos")
+      }
     }
+    
+    
   };
 
   return (

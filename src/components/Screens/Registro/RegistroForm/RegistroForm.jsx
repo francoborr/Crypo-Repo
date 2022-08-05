@@ -1,7 +1,6 @@
 import Select from "../../../UI/Select";
 import { useEffect, useRef } from "react";
 import { getDepartamentos } from "../../../../services/crypto";
-import { getCiudades } from "../../../../services/crypto";
 import { getCiudad } from "../../../../services/crypto";
 import { registro } from "../../../../services/crypto";
 import Button from "../../../UI/Button/Button";
@@ -18,10 +17,6 @@ const RegistroForm = () => {
   const dispatchUsuario = useDispatch();
   const dispachShowRegistration = useDispatch();
 
-  //let departamentos;
-  // const departamentoId = useRef();
-  // const ciudadId = useRef();
-  //const [departamentos, setDepartamentos] = useState([]);
   const [ciudades, setCiudades] = useState([]);
   const [deptoSel, setDeptoSel] = useState(0);
   const [ciudadSel, setCiudadSel] = useState(0);
@@ -33,7 +28,6 @@ const RegistroForm = () => {
     try {
       (async () => {
         const { departamentos } = await getDepartamentos();
-        //setDepartamentos(departamentos)
         dispatchDepartamentos(setDepartamentos(departamentos));        
       })();
     } catch (error) {
@@ -45,8 +39,7 @@ const RegistroForm = () => {
     try {
       (async () => {
         const { ciudades } = await getCiudad(deptoSel);
-        setCiudades(ciudades);
-        
+        setCiudades(ciudades);        
       })();
     } catch (error) {
       alert("Ha ocurrido un error", error);

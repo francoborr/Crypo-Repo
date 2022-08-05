@@ -56,6 +56,7 @@ async function login(user, pass) {
 
 //*Departamentos
 async function getDepartamentos() {
+  try{  
   const response = await fetch(
     `${CRYPTO}/departamentos.php`,
     {
@@ -66,13 +67,16 @@ async function getDepartamentos() {
       credentials: "include",
     }
   );
-  if (response.status === 200 || response.status === 201) {
+  if (response.status === 200) {
     return response.json();
   } else {
     return Promise.reject({
       message: "Error al obtener departamentos",
       status: response.status,
     });
+  }
+  }catch(error){
+    return Promise.reject(error)
   }
 }
 
