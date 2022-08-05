@@ -6,48 +6,50 @@ import { registro } from "../../../../services/crypto";
 import Button from "../../../UI/Button/Button";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setDepartamentos } from "../../../../app/slices/deptoSlice";
+import { setDepartamentos, setCiudades } from "../../../../app/slices/locationSlice";
 import { setLoginUser} from "../../../../app/slices/userSlice"
 import { setShowRegistration } from "../../../../app/slices/showRegistrationSlice";
 
 const RegistroForm = () => {
   const inputUserName = useRef();
   const inpuUserPass = useRef();
-  const dispatchDepartamentos = useDispatch();
-  const dispatchUsuario = useDispatch();
-  const dispachShowRegistration = useDispatch();
-
-  const [ciudades, setCiudades] = useState([]);
+  const dispatch = useDispatch();    
   const [deptoSel, setDeptoSel] = useState(0);
   const [ciudadSel, setCiudadSel] = useState(0);
   const departamentos = useSelector(
-    (state) => state.departamentos.departamentos
+    (state) => state.location.departamentos
   );
+  const  ciudades = useSelector(state => state.location.ciudades)
 
   useEffect(() => {
     try {
       (async () => {
         const { departamentos } = await getDepartamentos();
-        dispatchDepartamentos(setDepartamentos(departamentos));        
+        dispatch(setDepartamentos(departamentos));        
       })();
     } catch (error) {
       alert("Ha ocurrido un error", error);
     }
   }, []);
 
+
+
+
+
   useEffect(() => {
     try {
       (async () => {
         const { ciudades } = await getCiudad(deptoSel);
-        setCiudades(ciudades);        
+        dispatch(setCiudades(ciudades));        
       })();
     } catch (error) {
       alert("Ha ocurrido un error", error);
     }
   }, [deptoSel]);
+  
 
   const onHandleRegistro = async (e) => {
-    e.preventDefault();
+    e.preventDefault();    
     const userName = inputUserName.current.value;
     const password = inpuUserPass.current.value;
     const departamentoId = deptoSel;
@@ -67,8 +69,8 @@ const RegistroForm = () => {
           ciudadId
         );
         alert("Éxito al registrar usuario")
-        dispatchUsuario(setLoginUser({ apiKey: apiKey, id: id }))
-        dispachShowRegistration(setShowRegistration(false))
+        dispatch(setLoginUser({ apiKey: apiKey, id: id }))
+        dispatch(setShowRegistration(false))
 
       } catch (error) {        
         alert(error.message);
