@@ -21,7 +21,7 @@ const MontoFinal = () => {
     if (transacciones.length != 0) {
       montoFinalAux = transacciones.reduce((a, b) => {
         let aux =
-          b.tipo_operacion == 2
+          b.tipo_operacion == 1
             ? a + Number(b.valor_actual) * Number(b.cantidad)
             : a - Number(b.valor_actual) * Number(b.cantidad);
         return Number(aux);

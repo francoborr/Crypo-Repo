@@ -20,18 +20,7 @@ const NewTransactionForm = () => {
   const monedasSelect = useSelector((state) => state.monedas.monedas);
   const dispatchAddTransacciones = useDispatch();
 
-  const dispatchMonedas = useDispatch(); //Lista de monedas
 
-  useEffect(() => {
-    try {
-      (async () => {
-        const { monedas } = await getMonedas(apiKey);        
-        dispatchMonedas(setMonedas(monedas));
-      })();
-    } catch (error) {
-      alert("Ha ocurrido un error", error);
-    }
-  }, []);
 
   /****************************************************** */
   /*Para el manejo del id de la moneda seleccionada*/
