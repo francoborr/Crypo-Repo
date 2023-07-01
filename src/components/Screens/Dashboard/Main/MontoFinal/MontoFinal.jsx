@@ -18,12 +18,13 @@ const MontoFinal = () => {
 
   useEffect(() => {
     let montoFinalAux = 0;
-    if (transacciones.length != 0) {
+    if (transacciones.length !== 0) {
       montoFinalAux = transacciones.reduce((a, b) => {
         let aux =
-          b.tipo_operacion == 1
-            ? a + Number(b.valor_actual) * Number(b.cantidad)
-            : a - Number(b.valor_actual) * Number(b.cantidad);
+          b.tipoOperacion === 1
+            ? a + Number(b.valorActual) * Number(b.cantidad)
+            : a - Number(b.valorActual) * Number(b.cantidad);
+            console.log("El numero es ", aux)
         return Number(aux);
       }, 0);
     }

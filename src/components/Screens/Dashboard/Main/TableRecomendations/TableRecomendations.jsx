@@ -44,10 +44,10 @@ const TableRecomendations = () => {
         return {moneda : monedaTran.moneda, transaccion:monedaTran.transacciones[monedaTran.transacciones.length-1]}
     })       
     const recomendacionesCompraAux = monedasUltimaTransaccionAux.filter(moneda => {
-      return moneda.moneda.cotizacion < moneda.transaccion.valor_actual && moneda.transaccion.tipo_operacion==2
+      return moneda.moneda.cotizacion < moneda.transaccion.valorActual && moneda.transaccion.tipoOperacion==2
     })
     const recomendacionesVentaAux = monedasUltimaTransaccionAux.filter(moneda => {
-      return moneda.moneda.cotizacion > moneda.transaccion.valor_actual && moneda.transaccion.tipo_operacion==1 
+      return moneda.moneda.cotizacion > moneda.transaccion.valorActual && moneda.transaccion.tipoOperacion==1 
     })
     setRecomendacionesCompra(recomendacionesCompraAux);
     setRecomendacionesVenta(recomendacionesVentaAux);

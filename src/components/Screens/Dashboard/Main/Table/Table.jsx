@@ -32,10 +32,10 @@ const Table = () => {
       const nombre = moneda != undefined ? moneda.nombre : "cargando";
       return {
         id: transaccion.id,
-        tipo_operacion: transaccion.tipo_operacion == 1 ? "Compra" : "Venta",
+        tipooperacion: transaccion.tipoOperacion == 1 ? "Compra" : "Venta",
         moneda: nombre,
         cantidad: transaccion.cantidad,
-        valor_actual: transaccion.valor_actual,
+        valorActual: transaccion.valorActual,
       };
     });
 

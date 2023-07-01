@@ -62,10 +62,10 @@ const NewTransactionForm = () => {
             if (promesa.codigo == 200) {
               const tran = {
                 id: promesa.idTransaccion,
-                tipo_operacion: idCompraVenta,
+                tipoOperacion: idCompraVenta,
                 moneda: idMonedaSeleccionada,
                 cantidad: cantidad.current.value,
-                valor_actual: monedaSeleccionada.cotizacion,
+                valorActual: monedaSeleccionada.cotizacion,
               };
               dispatch(addTransaccion(tran));                              
             }

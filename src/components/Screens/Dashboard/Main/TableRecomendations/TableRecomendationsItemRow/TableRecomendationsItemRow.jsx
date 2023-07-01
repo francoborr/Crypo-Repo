@@ -3,7 +3,7 @@ const TableRecomendationsItemRow = ({monedaTransaccion, action}) => {
 <tr className="table">
     
   <td>{monedaTransaccion.moneda.nombre}</td>
-  <td>{monedaTransaccion.transaccion.valor_actual}</td>
+  <td>{monedaTransaccion.transaccion.valorActual}</td>
   <td>{monedaTransaccion.moneda.cotizacion}</td>
   <td>{action}</td>
 

@@ -11,15 +11,18 @@ const GraficoParaUnaMoneda= ()=>{
         (state) => state.transacciones.transacciones
       );
 
-
+      console.log("transacciones", transacciones) 
     const dispatch = useDispatch();
     const TransaccionesPorMoneda = useSelector((state)=> state.monedas.transaccionesPorMoneda)
     const [idMdaSeleccionada, setIdMdaSeleccionada] = useState();
 
     const setIdMonedaSelAux = (id) => {
+      console.log("transacciones", transacciones)
         const TransaccionesPorMonedaAux = transacciones.filter(tran => tran.moneda == id)        
+        console.log("TransaccionesPorMoneda" , TransaccionesPorMonedaAux)
         dispatch(setTransaccionesPorMoneda(TransaccionesPorMonedaAux))              
         setIdMdaSeleccionada(id);
+        
     };
 
     useEffect(() => {
@@ -42,7 +45,7 @@ const GraficoParaUnaMoneda= ()=>{
         series: [
           {
             name: "Precio de la transacción",
-            data: TransaccionesPorMoneda.map(tran => tran.valor_actual)
+            data: TransaccionesPorMoneda.map(tran => tran.valorActual)
           },
         ],
       };      

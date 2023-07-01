@@ -19,9 +19,9 @@ const comprasPorMoneda = useSelector((state)=> state.monedas.comprasPorMoneda);
   useEffect(() => {
     const ComprasPorMonedaAux = monedas.map((mon)=>{
         const {id} = mon;        
-        const transaccionesAux = transacciones.filter(tran=> tran.moneda == id && tran.tipo_operacion==1)            
+        const transaccionesAux = transacciones.filter(tran=> tran.moneda == id && tran.tipoOperacion==1)            
         const comprasPesos = transaccionesAux.reduce((a, b) => {
-            let aux =a + Number(b.valor_actual) * Number(b.cantidad)
+            let aux =a + Number(b.valorActual) * Number(b.cantidad)
             return Number(aux);
           }, 0);        
         return {moneda:mon, total:comprasPesos}

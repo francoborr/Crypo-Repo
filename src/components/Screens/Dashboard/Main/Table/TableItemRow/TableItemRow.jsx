@@ -1,13 +1,13 @@
 
 const TableItemRow = ({ transaccion }) => { 
   return (
-    <tr  className={`table-${transaccion.tipo_operacion === "Compra" ? "success" : "danger"
+    <tr  className={`table-${transaccion.tipooperacion === "Compra" ? "success" : "danger"
       }`}
     >
-      <td>{transaccion.tipo_operacion}</td>
+      <td>{transaccion.tipooperacion}</td>
       <td>{transaccion.moneda}</td>
       <td>{transaccion.cantidad}</td>
-      <td>{transaccion.valor_actual}</td>
+      <td>{transaccion.valorActual}</td>
     </tr>
   );
 };

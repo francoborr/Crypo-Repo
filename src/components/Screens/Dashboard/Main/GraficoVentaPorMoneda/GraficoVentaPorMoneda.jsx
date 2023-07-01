@@ -19,9 +19,10 @@ const ventasPorMoneda = useSelector((state)=> state.monedas.ventasPorMoneda);
   useEffect(() => {
     const ventasPorMonedaAux = monedas.map((mon)=>{
         const {id} = mon;        
-        const transaccionesAux = transacciones.filter(tran=> tran.moneda == id && tran.tipo_operacion==2)            
+        const transaccionesAux = transacciones.filter(tran=> tran.moneda === id && tran.tipoOperacion == 2)      
+        console.log("TransaccionesAUx", transaccionesAux)      
         const ventaPesos = transaccionesAux.reduce((a, b) => {
-            let aux =a + Number(b.valor_actual) * Number(b.cantidad)
+            let aux =a + Number(b.valorActual) * Number(b.cantidad)
             return Number(aux);
           }, 0);        
         return {moneda:mon, total:ventaPesos}
